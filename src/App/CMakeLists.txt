@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.18)
 
-set(CURRENT_PROJECT "${PROJECT_NAME}")
+set(CURRENT_PROJECT "${CMAKE_PROJECT_NAME}App")
+
 file(GLOB SOURCE_APP
     "*.h"
     "Private/*.h"
@@ -13,31 +14,31 @@ file(GLOB SOURCE_APP
 set(PUBLIC_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(PRIVATE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Private")
 
-
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Concurrent QUIET)
 
 if(${QT_VERSION_MAJOR} EQUAL 6)
-    qt_add_executable(${CURRENT_PROJECT} MANUAL_FINALIZATION ${SOURCE_APP})
+    qt_add_executable(${CMAKE_PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/translations.qrc" MANUAL_FINALIZATION ${SOURCE_APP})
 else()
-    add_executable(${CURRENT_PROJECT} MANUAL_FINALIZATION ${SOURCE_APP})
+    add_executable(${CMAKE_PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc"  MANUAL_FINALIZATION ${SOURCE_APP})
 endif()
 
-target_link_libraries(${CURRENT_PROJECT} PUBLIC Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(${CURRENT_PROJECT} PUBLIC "${PROJECT_NAME}Gui")
+target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC "${CMAKE_PROJECT_NAME}Gui")
 
-target_include_directories(${CURRENT_PROJECT} PUBLIC ${PUBLIC_INCLUDE_DIR})
-target_include_directories(${CURRENT_PROJECT} PRIVATE ${PRIVATE_INCLUDE_DIR})
+target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${PUBLIC_INCLUDE_DIR})
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${PRIVATE_INCLUDE_DIR})
 
 set(TARGET_DIR "${CMAKE_SOURCE_DIR}/Deploy")
 file(MAKE_DIRECTORY ${TARGET_DIR})
 
+qt_standard_project_setup(REQUIRES 6.5)
+
 if(IOS)
-    set_target_properties(appCurrencyConverter PROPERTIES
+    set_target_properties(${CURRENT_PROJECT} PROPERTIES
         MACOSX_BUNDLE_GUI_IDENTIFIER com.master.appCurrencyConverter
         MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
         MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
         MACOSX_BUNDLE TRUE
-        # WIN32_EXECUTABLE TRUE
     )
 
     set(plist_file "${CMAKE_CURRENT_SOURCE_DIR}/apple/Info.plist")
@@ -55,7 +56,3 @@ else()
     #addDeployFromCustomFile("CurrencyConverter" ${DeployFile})
 endif()
 
-if(QT_VERSION_MAJOR EQUAL 6)
-    qt_import_plugins(${CURRENT_PROJECT})
-    qt_finalize_target(${CURRENT_PROJECT})
-endif()

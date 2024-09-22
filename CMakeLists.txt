@@ -1,15 +1,17 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.18)
 
 project(CurrencyConverter VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 set(CurrencyConvertor_APP ON)
+set(CurrencyConvertor_Test OFF)
 
 if(IOS)
     option(BUILD_SHARED_LIBS "Build shared libs" OFF)
@@ -29,10 +31,11 @@ else()
     option(CurrencyConvertor_Test "This option enabled or disabled app test" ON)
 endif()
 
+add_subdirectory(src/Core)
+
 if(CurrencyConvertor_APP)
-    add_subdirectory(src/Core)
-    add_subdirectory(src/App)
     add_subdirectory(src/GUI)
+    add_subdirectory(src/App)
 else()
     message("The ${PROJECT_NAME} app is disabled")
 endif()
@@ -44,7 +47,10 @@ else()
 endif()
 
 include(GNUInstallDirs)
-install(TARGETS CurrencyConverter
+install(TARGETS
+    "${PROJECT_NAME}"
+    "${PROJECT_NAME}Core"
+    "${PROJECT_NAME}Gui"
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
