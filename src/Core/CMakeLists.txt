@@ -28,3 +28,5 @@ add_library(${CURRENT_PROJECT} ${SOURCE_APP} ${SOURCE_QRC})
 
 target_include_directories(${CURRENT_PROJECT} PUBLIC ${PUBLIC_INCLUDE_DIR})
 target_include_directories(${CURRENT_PROJECT} PRIVATE ${PRIVATE_INCLUDE_DIR})
+
+

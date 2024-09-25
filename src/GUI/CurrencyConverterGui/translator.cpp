@@ -9,7 +9,7 @@ Translator::Translator(QQmlEngine *engine, QObject *parent)
 
 void Translator::setLanguage(const QString &lanugageCode)
 {
-    if(m_translator->load(QString("translations_%1").arg(lanugageCode).toLatin1(), ":/i18n"))
+    if(m_translator->load(QString("translations_%1").arg(lanugageCode).toLatin1(), ":/"))
     {
        m_engine->retranslate();
     }

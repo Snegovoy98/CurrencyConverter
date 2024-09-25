@@ -19,6 +19,7 @@ if(${QT_VERSION_MAJOR})
         "*.qrc"
         "CurrencyConverterGui/*.qrc"
         "private/*.qrc"
+        "CurrencyConverterModules/*.qml"
     )
 endif()
 
@@ -45,10 +46,12 @@ set(TS_FILES "translations/translations_en.ts"
              "translations/translations_ua.ts"
 )
 
-qt6_add_lupdate(${CURRENT_PROJECT}
-    RESOURCE_PREFIX "/i18n"
+qt6_add_lupdate("${CMAKE_PROJECT_NAME}"
+    SOURCE_TARGETS "${CMAKE_PROJECT_NAME}" "${CMAKE_PROJECT_NAME}Gui"
     TS_FILES ${TS_FILES}
 )
+
+qt6_add_lrelease(TS_FILES ${TS_FILES})
 
 target_include_directories(${CURRENT_PROJECT} PUBLIC ${PUBLIC_INCLUDE_DIR})
 target_include_directories(${CURRENT_PROJECT} PRIVATE ${PRIVATE_INCLUDE_DIR})

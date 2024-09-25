@@ -19,7 +19,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Concurrent QUIET)
 if(${QT_VERSION_MAJOR} EQUAL 6)
     qt_add_executable(${CMAKE_PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/translations.qrc" MANUAL_FINALIZATION ${SOURCE_APP})
 else()
-    add_executable(${CMAKE_PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc"  MANUAL_FINALIZATION ${SOURCE_APP})
+    add_executable(${CMAKE_PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/translations.qrc"  MANUAL_FINALIZATION ${SOURCE_APP})
 endif()
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC Qt${QT_VERSION_MAJOR}::Core)
