@@ -4,7 +4,9 @@ set(CURRENT_PROJECT "${CMAKE_PROJECT_NAME}App")
 
 file(GLOB SOURCE_APP
     "*.h"
+    "utility/*.h"
     "Private/*.h"
+    "utility/*.cpp"
     "*cpp"
     "Private/*.cpp"
     "*.qrc"
