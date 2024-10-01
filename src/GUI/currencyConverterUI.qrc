@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>CurrencyConverterModules/Main.qml</file>
+        <file>CurrencyConverterModules/Components/CurrencyConvertionCard.qml</file>
+        <file>CurrencyConverterModules/Components/CustomComboBox.qml</file>        
+        <file>CurrencyConverterModules/Components/ConvertionHistory.qml</file>
     </qresource>
 </RCC>
