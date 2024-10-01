@@ -9,6 +9,9 @@ public:
     CurrencyConverterGui();
 
     bool init(QQmlApplicationEngine *engine);
+
+private:
+    QString m_os_style;
 };
 
 #endif // CURRENCYCONVERTERGUI_H

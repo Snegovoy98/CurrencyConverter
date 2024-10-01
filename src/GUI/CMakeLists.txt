@@ -20,6 +20,8 @@ if(${QT_VERSION_MAJOR})
         "CurrencyConverterGui/*.qrc"
         "private/*.qrc"
         "CurrencyConverterModules/*.qml"
+        "CurrencyConverterModules/Common/*.qml"
+        "CurrencyConverterModules/Components/*.qml"
     )
 endif()
 
@@ -28,7 +30,7 @@ set(PRIVATE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/private")
 
 add_library(${CURRENT_PROJECT} ${SOURCE_APP} ${SOURCE_QRC})
 
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick LinguistTools Gui Qml REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick QuickControls2 LinguistTools Gui Qml REQUIRED)
 
 target_link_libraries(${CURRENT_PROJECT}
                 PUBLIC
@@ -36,6 +38,7 @@ target_link_libraries(${CURRENT_PROJECT}
                 Qt${QT_VERSION_MAJOR}::Quick
                 Qt${QT_VERSION_MAJOR}::Gui
                 Qt${QT_VERSION_MAJOR}::Qml
+                Qt${QT_VERSION_MAJOR}::QuickControls2
 )
 
 set(TS_FILES "translations/translations_en.ts"
