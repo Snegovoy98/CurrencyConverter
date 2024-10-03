@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls
 import QtQuick.Layouts
+import Gui
 
 ListView {
     id: control
@@ -25,16 +26,16 @@ ListView {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignLeft
-                Layout.leftMargin: 10
+                Layout.leftMargin: Constants.margins
 
                 Label {
                     text: model.currency_title
-                    font.pointSize: 14
+                    font.pointSize: Constants.mainFontPointSize
                 }
 
                 Label {
                     text: model.value_per_unit
-                    font.pointSize: 14
+                    font.pointSize: Constants.mainFontPointSize
                     color: "grey"
                 }
             }
@@ -43,12 +44,12 @@ ListView {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignRight
-                Layout.rightMargin: 10
+                Layout.rightMargin: Constants.margins
 
                 Label {
                     text: model.coverted_value
-                    font.pointSize: 14
-                    color: "blue"
+                    font.pointSize: Constants.mainFontPointSize
+                    color: Theme.currencyOnExchangedColor
                 }
             }
         }

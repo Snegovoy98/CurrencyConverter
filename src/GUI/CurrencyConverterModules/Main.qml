@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Gui
 import "./Components"
 import "./Common"
 
@@ -19,7 +20,7 @@ ApplicationWindow {
             text: qsTr("Currency Exchange")
             elide: Label.ElideRight
             anchors.centerIn: parent
-            font.pointSize: 14
+            font.pointSize: Constants.mainFontPointSize
         }
 
         ToolButton {
@@ -90,10 +91,10 @@ ApplicationWindow {
 
             CustomComboBox {
                 id: selectionOnChanged
-                Layout.preferredWidth: 220
+                Layout.preferredWidth: Constants.comboboxWidth
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                Layout.leftMargin: 20
+                Layout.leftMargin: Constants.margins
                 currentIndex: 0
             }
 
@@ -112,10 +113,10 @@ ApplicationWindow {
 
             CustomComboBox {
                 id: selectionToChanged
-                Layout.preferredWidth: 220
+                Layout.preferredWidth: Constants.comboboxWidth
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                Layout.rightMargin: 20
+                Layout.rightMargin: Constants.margins
                 currentIndex: 1
             }
         }
@@ -124,14 +125,14 @@ ApplicationWindow {
             id: currencyCard
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.leftMargin:  20
-            Layout.rightMargin: 20
+            Layout.leftMargin:  Constants.margins
+            Layout.rightMargin: Constants.margins
 
             radius: 12
 
             border {
-                width: 1
-                color: "blue"
+                width: Constants.borderWidth
+                color: Theme.borderStyleColor
             }
         }
 
@@ -139,15 +140,15 @@ ApplicationWindow {
             id: convertionHistory
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.leftMargin:  20
-            Layout.rightMargin: 20
+            Layout.leftMargin:  Constants.margins
+            Layout.rightMargin: Constants.margins
         }
 
         Button {
             id: convertionButton
             text: qsTr("Exchange")
-            Layout.preferredWidth: 120
-            Layout.preferredHeight: 50
+            Layout.preferredWidth: Constants.buttonsWidth
+            Layout.preferredHeight: Constants.buttonsHeight
             highlighted: true
             Layout.alignment: Qt.AlignHCenter
         }
