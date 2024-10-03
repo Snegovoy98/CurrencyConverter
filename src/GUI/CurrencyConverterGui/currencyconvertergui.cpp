@@ -18,6 +18,9 @@ bool CurrencyConverterGui::init(QQmlApplicationEngine *engine)
     #endif
 
     QQuickStyle::setStyle(m_os_style);
+
+        engine->addImportPath(":/");
+
     engine->load("qrc:/CurrencyConverterModules/Main.qml");
 
     if(engine->rootObjects().isEmpty())

@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls
+import Gui
 
 Rectangle {
     id: root
@@ -18,8 +19,8 @@ Rectangle {
         Label {
             id: currencyOnChangedTitle
             text: "Euro"
-            color: "blue"
-            font.pointSize: 16
+            color: Theme.currencyOnExchangedColor
+            font.pointSize: Constants.currencyPointSize
 
             anchors.verticalCenter: parent.verticalCenter
         }
@@ -35,8 +36,8 @@ Rectangle {
         Label {
             id: currencyToChangedTitle
             text: "USD"
-            color: "red"
-            font.pointSize: 16
+            color: Theme.currencyToExchangedColor
+            font.pointSize: Constants.currencyPointSize
 
             anchors.verticalCenter: parent.verticalCenter
         }

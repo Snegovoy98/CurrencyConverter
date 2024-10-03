@@ -2,7 +2,10 @@
     <qresource prefix="/">
         <file>CurrencyConverterModules/Main.qml</file>
         <file>CurrencyConverterModules/Components/CurrencyConvertionCard.qml</file>
-        <file>CurrencyConverterModules/Components/CustomComboBox.qml</file>        
+        <file>CurrencyConverterModules/Components/CustomComboBox.qml</file>
         <file>CurrencyConverterModules/Components/ConvertionHistory.qml</file>
+        <file>CurrencyConverterModules/Common/Theme.qml</file>
+        <file>CurrencyConverterModules/Common/Constants.qml</file>
+        <file>CurrencyConverterModules/Common/LanguagesModel.qml</file>
     </qresource>
 </RCC>

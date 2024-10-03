@@ -4,12 +4,12 @@
 <context>
     <name>CurrencyConvertionCard</name>
     <message>
-        <location filename="../CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="48"/>
+        <location filename="../CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="49"/>
         <source>I changing</source>
         <translation>Меняю</translation>
     </message>
     <message>
-        <location filename="../CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="69"/>
+        <location filename="../CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="70"/>
         <source>I receive</source>
         <translation>Получаю</translation>
     </message>
@@ -50,12 +50,12 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../CurrencyConverterModules/Main.qml" line="12"/>
+        <location filename="../CurrencyConverterModules/Main.qml" line="13"/>
         <source>Currency Converter</source>
         <translation>Конвертер Валют</translation>
     </message>
     <message>
-        <location filename="../CurrencyConverterModules/Main.qml" line="19"/>
+        <location filename="../CurrencyConverterModules/Main.qml" line="20"/>
         <source>Currency Exchange</source>
         <translation>Обмен валюты</translation>
     </message>
