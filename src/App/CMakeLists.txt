@@ -21,13 +21,15 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Concurrent QUIET)
 
 set(MACOSX_BUNDLE_ICON_FILE AppIcon.icns)
 
+set(app_icon_macos "${CMAKE_CURRENT_SOURCE_DIR}/apple/Assets.xcassets/AppIcon.icns")
+
 set_source_files_properties(${app_icon_macos} PROPERTIES
 MACOSX_PACKAGE_LOCATION "Resources")
 
 if(${QT_VERSION_MAJOR} EQUAL 6)
     qt_add_executable(${CMAKE_PROJECT_NAME} MACOSX_BUNDLE "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/translations.qrc" MANUAL_FINALIZATION ${SOURCE_APP} ${app_icon_macos})
 else()
-    add_executable(${CMAKE_PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/translations.qrc"  MANUAL_FINALIZATION ${SOURCE_APP} ${app_icon_macos})
+    add_executable(${CMAKE_PROJECT_NAME} MACOSX_BUNDLE "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/translations.qrc"  MANUAL_FINALIZATION ${SOURCE_APP} ${app_icon_macos})
 endif()
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC Qt${QT_VERSION_MAJOR}::Core)
