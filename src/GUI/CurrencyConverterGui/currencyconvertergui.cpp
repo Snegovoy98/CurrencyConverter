@@ -13,13 +13,13 @@ bool CurrencyConverterGui::init(QQmlApplicationEngine *engine)
 
     #ifdef Q_OS_MACOS
         m_os_style = "macOS";
-    #elif Q_OS_IOS
+    #else
         m_os_style = "iOS";
     #endif
 
     QQuickStyle::setStyle(m_os_style);
 
-        engine->addImportPath(":/");
+    engine->addImportPath(":/");
 
     engine->load("qrc:/CurrencyConverterModules/Main.qml");
 

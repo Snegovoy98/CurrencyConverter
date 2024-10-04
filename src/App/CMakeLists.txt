@@ -11,6 +11,7 @@ file(GLOB SOURCE_APP
     "Private/*.cpp"
     "*.qrc"
     "Private/*.qrc"
+    "apple/Assets.xcassets/*.icns"
 )
 
 set(PUBLIC_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
@@ -18,10 +19,15 @@ set(PRIVATE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Private")
 
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Concurrent QUIET)
 
+set(MACOSX_BUNDLE_ICON_FILE AppIcon.icns)
+
+set_source_files_properties(${app_icon_macos} PROPERTIES
+MACOSX_PACKAGE_LOCATION "Resources")
+
 if(${QT_VERSION_MAJOR} EQUAL 6)
-    qt_add_executable(${CMAKE_PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/translations.qrc" MANUAL_FINALIZATION ${SOURCE_APP})
+    qt_add_executable(${CMAKE_PROJECT_NAME} MACOSX_BUNDLE "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/translations.qrc" MANUAL_FINALIZATION ${SOURCE_APP} ${app_icon_macos})
 else()
-    add_executable(${CMAKE_PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/translations.qrc"  MANUAL_FINALIZATION ${SOURCE_APP})
+    add_executable(${CMAKE_PROJECT_NAME} "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/translations.qrc"  MANUAL_FINALIZATION ${SOURCE_APP} ${app_icon_macos})
 endif()
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC Qt${QT_VERSION_MAJOR}::Core)
@@ -35,26 +41,26 @@ file(MAKE_DIRECTORY ${TARGET_DIR})
 
 qt_standard_project_setup(REQUIRES 6.5)
 
-if(IOS)
-    set_target_properties(${CURRENT_PROJECT} PROPERTIES
-        MACOSX_BUNDLE_GUI_IDENTIFIER com.master.appCurrencyConverter
-        MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-        MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-        MACOSX_BUNDLE TRUE
-    )
+# if(IOS)
+#     set_target_properties(${CURRENT_PROJECT} PROPERTIES
+#         MACOSX_BUNDLE_GUI_IDENTIFIER com.master.appCurrencyConverter
+#         MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+#         MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+#         MACOSX_BUNDLE TRUE
+#     )
 
-    set(plist_file "${CMAKE_CURRENT_SOURCE_DIR}/apple/Info.plist")
-    configure_file("${plist_file}.in" ${plist_file} @ONLY)
+#     set(plist_file "${CMAKE_CURRENT_SOURCE_DIR}/apple/Info.plist")
+#     configure_file("${plist_file}.in" ${plist_file} @ONLY)
 
-    set(QT_IOS_EXPORT_ARCHIVE_XCODEBUILD_FLAGS "-allowProvisioningUpdates")
-    addDeployIPA(${CURRENT_PROJECT}
-            "${CURRENCY_CONVERTOR_ID}"
-            "${TARGET_DIR}"
-            "${CMAKE_CURRENT_SOURCE_DIR}/apple"
-    )
-else()
-    set(DeployFile "${CMAKE_CURRENT_SOURCE_DIR}/Deploy/CurrencyConverter.json")
+#     set(QT_IOS_EXPORT_ARCHIVE_XCODEBUILD_FLAGS "-allowProvisioningUpdates")
+#     addDeployIPA(${CURRENT_PROJECT}
+#             "${CURRENCY_CONVERTOR_ID}"
+#             "${TARGET_DIR}"
+#             "${CMAKE_CURRENT_SOURCE_DIR}/apple"
+#     )
+# else()
+#     set(DeployFile "${CMAKE_CURRENT_SOURCE_DIR}/Deploy/CurrencyConverter.json")
     #configure_file("${DeployFile}.in" ${DeployFile} @ONLY)
     #addDeployFromCustomFile("CurrencyConverter" ${DeployFile})
-endif()
+# endif()
 
