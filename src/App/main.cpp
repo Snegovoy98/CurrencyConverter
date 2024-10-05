@@ -9,8 +9,6 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    app.setWindowIcon(QIcon(":/private/logo/AppIcon.png"));
-
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreationFailed,

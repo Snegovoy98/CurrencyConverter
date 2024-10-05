@@ -46,15 +46,6 @@ else()
     message("The ${PROJECT_NAME} tests is disabled")
 endif()
 
-message("${MACOSX_BUNDLE} 1")
-
-set_target_properties("${PROJECT_NAME}" PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER com.master.CurrencyConverter
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-)
-
 include(GNUInstallDirs)
 install(TARGETS
     "${PROJECT_NAME}"
