@@ -11,6 +11,5 @@
         <file>private/countries_icons/it-language-icon.svg</file>
         <file>private/countries_icons/ru-language-icon.svg</file>
         <file>private/countries_icons/uk-language-icon.svg</file>
-        <file>private/logo/AppIcon.png</file>
     </qresource>
 </RCC>
