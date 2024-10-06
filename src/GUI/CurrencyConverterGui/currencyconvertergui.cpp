@@ -1,15 +1,13 @@
+#include "currencyconvertergui.h"
 #include <QGuiApplication>
 #include <QQuickStyle>
-#include "currencyconvertergui.h"
-#include "translator.h"
+#include <QQmlContext>
 
 CurrencyConverterGui::CurrencyConverterGui() {}
 
 bool CurrencyConverterGui::init(QQmlApplicationEngine *engine)
 {
-    Translator translator(engine);
-
-    translator.setLanguage("ru");
+    m_translator = new Translator(engine);
 
     #ifdef Q_OS_MACOS
         m_os_style = "macOS";
@@ -20,6 +18,8 @@ bool CurrencyConverterGui::init(QQmlApplicationEngine *engine)
     QQuickStyle::setStyle(m_os_style);
 
     engine->addImportPath(":/");
+
+    engine->rootContext()->setContextProperty("translator", m_translator.get());
 
     engine->load("qrc:/CurrencyConverterModules/Main.qml");
 

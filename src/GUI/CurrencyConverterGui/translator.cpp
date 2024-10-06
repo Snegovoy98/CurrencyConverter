@@ -1,4 +1,5 @@
 #include "translator.h"
+#include <QGuiApplication>
 
 Translator::Translator(QQmlEngine *engine, QObject *parent)
     : QObject{parent}
@@ -7,11 +8,14 @@ Translator::Translator(QQmlEngine *engine, QObject *parent)
     m_translator = new QTranslator(this);
 }
 
-void Translator::setLanguage(const QString &lanugageCode)
+void Translator::setLanguage(const QString &languageCode)
 {
-    if(m_translator->load(QString("translations_%1").arg(lanugageCode).toLatin1(), ":/"))
+    if(m_translator->load(QString("translations_%1").arg(languageCode).toLatin1(), ":/"))
     {
-       m_engine->retranslate();
+        if(qApp->installTranslator(m_translator))
+        {
+            m_engine->retranslate();
+        }
     }
     else
     {

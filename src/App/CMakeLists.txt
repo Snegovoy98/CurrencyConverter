@@ -17,19 +17,18 @@ file(GLOB SOURCE_APP
 set(PUBLIC_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(PRIVATE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Private")
 
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Concurrent QUIET)
-
-#set()
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Concurrent LinguistTools QUIET)
 
 set(app_icon_macos "${CMAKE_CURRENT_SOURCE_DIR}/apple/Assets.xcassets/AppIcon.icns")
 
 set_source_files_properties(${app_icon_macos} PROPERTIES
-MACOSX_PACKAGE_LOCATION "Resources")
+                            MACOSX_PACKAGE_LOCATION "Resources"
+)
 
 if(${QT_VERSION_MAJOR} EQUAL 6)
-    qt_add_executable(${CMAKE_PROJECT_NAME} MACOSX_BUNDLE "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/translations.qrc" MANUAL_FINALIZATION ${SOURCE_APP} ${app_icon_macos})
+    qt_add_executable(${CMAKE_PROJECT_NAME} MACOSX_BUNDLE translations.qrc MANUAL_FINALIZATION ${SOURCE_APP} ${app_icon_macos})
 else()
-    add_executable(${CMAKE_PROJECT_NAME} MACOSX_BUNDLE "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/translations.qrc"  MANUAL_FINALIZATION ${SOURCE_APP} ${app_icon_macos})
+    add_executable(${CMAKE_PROJECT_NAME} MACOSX_BUNDLE translations.qrc  MANUAL_FINALIZATION ${SOURCE_APP} ${app_icon_macos})
 endif()
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC Qt${QT_VERSION_MAJOR}::Core)
@@ -41,7 +40,21 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${PRIVATE_INCLUDE_DIR})
 set(TARGET_DIR "${CMAKE_SOURCE_DIR}/Deploy")
 file(MAKE_DIRECTORY ${TARGET_DIR})
 
-qt_standard_project_setup(REQUIRES 6.5)
+qt_standard_project_setup(REQUIRES 6.7)
+
+set(TS_FILES "translations/translations_en.ts"
+             "translations/translations_ru.ts"
+             "translations/translations_fr.ts"
+             "translations/translations_sp.ts"
+             "translations/translations_it.ts"
+             "translations/translations_ua.ts"
+)
+
+qt6_add_translations(
+    TARGETS "${CMAKE_PROJECT_NAME}" "${CMAKE_PROJECT_NAME}Gui"
+    RESOURCE_PREFIX "/"
+    TS_FILES ${TS_FILES}
+)
 
 set_target_properties("${PROJECT_NAME}" PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER com.master.CurrencyConverter
@@ -51,27 +64,4 @@ set_target_properties("${PROJECT_NAME}" PROPERTIES
     MACOSX_BUNDLE_ICON_FILE AppIcon.icns
     RESOURCE ${app_icon_macos}
 )
-
-# if(IOS)
-#     set_target_properties(${CURRENT_PROJECT} PROPERTIES
-#         MACOSX_BUNDLE_GUI_IDENTIFIER com.master.appCurrencyConverter
-#         MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-#         MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-#         MACOSX_BUNDLE TRUE
-#     )
-
-#     set(plist_file "${CMAKE_CURRENT_SOURCE_DIR}/apple/Info.plist")
-#     configure_file("${plist_file}.in" ${plist_file} @ONLY)
-
-#     set(QT_IOS_EXPORT_ARCHIVE_XCODEBUILD_FLAGS "-allowProvisioningUpdates")
-#     addDeployIPA(${CURRENT_PROJECT}
-#             "${CURRENCY_CONVERTOR_ID}"
-#             "${TARGET_DIR}"
-#             "${CMAKE_CURRENT_SOURCE_DIR}/apple"
-#     )
-# else()
-#     set(DeployFile "${CMAKE_CURRENT_SOURCE_DIR}/Deploy/CurrencyConverter.json")
-    #configure_file("${DeployFile}.in" ${DeployFile} @ONLY)
-    #addDeployFromCustomFile("CurrencyConverter" ${DeployFile})
-# endif()
 

@@ -30,7 +30,7 @@ set(PRIVATE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/private")
 
 add_library(${CURRENT_PROJECT} ${SOURCE_APP} ${SOURCE_QRC})
 
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick QuickControls2 LinguistTools Gui Qml REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick QuickControls2 Gui Qml REQUIRED)
 
 target_link_libraries(${CURRENT_PROJECT}
                 PUBLIC
@@ -40,21 +40,6 @@ target_link_libraries(${CURRENT_PROJECT}
                 Qt${QT_VERSION_MAJOR}::Qml
                 Qt${QT_VERSION_MAJOR}::QuickControls2
 )
-
-set(TS_FILES "translations/translations_en.ts"
-             "translations/translations_ru.ts"
-             "translations/translations_fr.ts"
-             "translations/translations_sp.ts"
-             "translations/translations_it.ts"
-             "translations/translations_ua.ts"
-)
-
-qt6_add_lupdate("${CMAKE_PROJECT_NAME}"
-    SOURCE_TARGETS "${CMAKE_PROJECT_NAME}" "${CMAKE_PROJECT_NAME}Gui"
-    TS_FILES ${TS_FILES}
-)
-
-qt6_add_lrelease(TS_FILES ${TS_FILES})
 
 list(APPEND QML_FILES "CurrencyConverterModules/Common/Theme.qml"
                       "CurrencyConverterModules/Common/Constants.qml"
