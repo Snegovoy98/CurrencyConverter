@@ -4,7 +4,6 @@
         <file>translations/translations_fr.ts</file>
         <file>translations/translations_it.ts</file>
         <file>translations/translations_ru.ts</file>
-        <file>CurrencyConverterModules/Common/LanguagesModel.qml</file>
         <file>translations/translations_sp.ts</file>
         <file>translations/translations_ua.ts</file>
     </qresource>

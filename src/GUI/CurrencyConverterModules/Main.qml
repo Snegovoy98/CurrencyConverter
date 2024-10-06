@@ -40,11 +40,11 @@ ApplicationWindow {
                 color: "transparent"
             }
 
-            onClicked: langaugesMenu.open()
+            onClicked: languagesMenu.open()
         }
 
         Menu {
-            id: langaugesMenu
+            id: languagesMenu
             width: 100
             x: lanugagesToolBar.x - 15
             y: lanugagesToolBar.y + 35
@@ -62,6 +62,11 @@ ApplicationWindow {
                     icon.source: model.source
                     icon.color: model.color
                     text: model.title
+
+                    onClicked: {
+                        translator.setLanguage(model.code)
+                        languagesMenu.close()
+                    }
                 }
 
                 ScrollBar.vertical: ScrollBar {

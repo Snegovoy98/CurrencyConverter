@@ -1,6 +1,5 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QIcon>
 #include "CurrencyConverterGui/currencyconvertergui.h"
 
 int main(int argc, char *argv[])
@@ -20,5 +19,5 @@ int main(int argc, char *argv[])
 
     currencyConverterGui.init(&engine);
 
-   return app.exec();
+    return app.exec();
 }
