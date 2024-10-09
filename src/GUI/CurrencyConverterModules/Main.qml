@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -20,7 +21,6 @@ ApplicationWindow {
             text: qsTr("Currency Exchange")
             elide: Label.ElideRight
             anchors.centerIn: parent
-            font.pointSize: Constants.mainFontPointSize
         }
 
         ToolButton {
@@ -45,26 +45,34 @@ ApplicationWindow {
 
         Menu {
             id: languagesMenu
-            width: 100
+            width: 125
             x: lanugagesToolBar.x - 15
             y: lanugagesToolBar.y + 35
 
             ListView {
                 id: menuView
                 anchors.fill: parent
+                clip: true
 
                 model: LanguagesModel {}
 
                 delegate: MenuItem {
                     width: menuView.width
                     height: 25
+                    spacing: 5
 
-                    icon.source: model.source
-                    icon.color: model.color
-                    text: model.title
+                    required property string source
+                    required property color color
+                    required property string title
+                    required property string code
+
+                    icon.source: source
+                    icon.color: color
+                    text: title
+                    font.pointSize: Constants.languagesFontPointSize
 
                     onClicked: {
-                        translator.setLanguage(model.code)
+                        translator.setLanguage(code)
                         languagesMenu.close()
                     }
                 }
@@ -105,7 +113,7 @@ ApplicationWindow {
 
             RoundButton {
                 id: refreshRoundButton
-                width: 30
+                Layout.preferredWidth: 30
                 highlighted: true
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 icon.source: "qrc:/private/refresh_button.svg"

@@ -55,7 +55,7 @@
         <translation>Обмен валюты</translation>
     </message>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="157"/>
+        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="154"/>
         <source>Exchange</source>
         <translation>Обмен</translation>
     </message>

@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick 2.15
 import QtQuick.Controls
 
@@ -19,11 +21,15 @@ ComboBox {
     textRole: "currency"
 
     delegate: ItemDelegate {
+        id: itemDelegate
         width: root.width
+        required property int index
+        required property string currency
+
         contentItem: Label {
-            text: model.currency
+            id: it
+            text: itemDelegate.currency
             color: "blue"
-            font: root.font
             elide: Text.ElideRight
             verticalAlignment: Text.AlignVCenter
         }
