@@ -25,6 +25,13 @@ ListModel {
     }
 
     ListElement {
+        source: "qrc:/private/countries_icons/es-language-icon.svg"
+        title: qsTr("Spanish")
+        color: "blue"
+        code : "sp"
+    }
+
+    ListElement {
         source: "qrc:/private/countries_icons/ru-language-icon.svg"
         title: qsTr("Russian")
         color: "blue"

@@ -8,6 +8,7 @@ QtObject {
     property int buttonsWidth: 120
     property int buttonsHeight: 50
     property int comboboxWidth: 220
+    property int languagesFontPointSize: 10
     property int mainFontPointSize: 14
     property int currencyPointSize: 16
 }

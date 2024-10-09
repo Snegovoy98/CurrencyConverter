@@ -59,7 +59,7 @@
         <translation>Change de devises</translation>
     </message>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="157"/>
+        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="154"/>
         <source>Exchange</source>
         <translation>Échange</translation>
     </message>

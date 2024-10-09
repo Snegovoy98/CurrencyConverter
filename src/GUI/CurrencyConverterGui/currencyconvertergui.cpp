@@ -19,6 +19,7 @@ bool CurrencyConverterGui::init(QQmlApplicationEngine *engine)
 
     engine->addImportPath(":/");
 
+
     engine->rootContext()->setContextProperty("translator", m_translator.get());
 
     engine->load("qrc:/CurrencyConverterModules/Main.qml");

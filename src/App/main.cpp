@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QFontDatabase>
 #include "CurrencyConverterGui/currencyconvertergui.h"
 
 int main(int argc, char *argv[])
@@ -14,6 +15,8 @@ int main(int argc, char *argv[])
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
+
+    app.setFont(QFont(QFontDatabase::families().at(8)));
 
     CurrencyConverterGui currencyConverterGui;
 

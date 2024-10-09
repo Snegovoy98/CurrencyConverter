@@ -1,3 +1,4 @@
+pragma ComponentBehavior: Bound
 import QtQuick 2.15
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -19,6 +20,10 @@ ListView {
         width: control.width
         height: 50
 
+        required property string currency_title
+        required property double value_per_unit
+        required property double coverted_value
+
         RowLayout {
             anchors.fill: parent
 
@@ -29,12 +34,12 @@ ListView {
                 Layout.leftMargin: Constants.margins
 
                 Label {
-                    text: model.currency_title
+                    text: convertionHistoryDelegate.currency_title
                     font.pointSize: Constants.mainFontPointSize
                 }
 
                 Label {
-                    text: model.value_per_unit
+                    text: convertionHistoryDelegate.value_per_unit
                     font.pointSize: Constants.mainFontPointSize
                     color: "grey"
                 }
@@ -47,7 +52,7 @@ ListView {
                 Layout.rightMargin: Constants.margins
 
                 Label {
-                    text: model.coverted_value
+                    text: convertionHistoryDelegate.coverted_value
                     font.pointSize: Constants.mainFontPointSize
                     color: Theme.currencyOnExchangedColor
                 }
