@@ -31,6 +31,7 @@ else()
     option(CurrencyConvertor_Test "This option enabled or disabled app test" ON)
 endif()
 
+add_subdirectory(src/Interfaces)
 add_subdirectory(src/Core)
 
 if(CurrencyConvertor_APP)

@@ -5,6 +5,8 @@ import QtQuick.Layouts
 import Gui
 import "./Components"
 import "./Common"
+import com.preobrazhenskyi.currency_on_exchange_model 1.0
+import com.preobrazhenskyi.currency_to_exchange_model 1.0
 
 ApplicationWindow {
     id: mainPage
@@ -109,6 +111,9 @@ ApplicationWindow {
                 Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                 Layout.leftMargin: Constants.margins
                 currentIndex: 0
+                model: currencyOnExchangeModel
+                textRole: "currency_value"
+                valueRole: "currency_code"
             }
 
             RoundButton {
@@ -131,6 +136,8 @@ ApplicationWindow {
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                 Layout.rightMargin: Constants.margins
                 currentIndex: 1
+                model: currencyToExchangeModel
+                textRole: "currency_value"
             }
         }
 
@@ -146,6 +153,23 @@ ApplicationWindow {
             border {
                 width: Constants.borderWidth
                 color: Theme.borderStyleColor
+            }
+
+            Component.onCompleted: serviceManager.get("https://api.monobank.ua/bank/currency")
+        }
+
+        CurrencyOnExchangeModel {
+            id: currencyOnExchangeModel
+
+            Component.onCompleted: {
+                serviceManager.replyGetted.connect(currencyOnExchangeModel.parseReply)
+            }
+        }
+
+        CurrencyToExchangeModel {
+            id: currencyToExchangeModel
+            Component.onCompleted: {
+                serviceManager.replyGetted.connect(currencyToExchangeModel.parseReply)
             }
         }
 

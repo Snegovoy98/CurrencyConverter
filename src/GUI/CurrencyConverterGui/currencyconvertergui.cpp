@@ -2,6 +2,8 @@
 #include <QGuiApplication>
 #include <QQuickStyle>
 #include <QQmlContext>
+#include "../private/models/currencyonexchangemodel.h"
+#include "../private/models/currencytoexchangemodel.h"
 
 CurrencyConverterGui::CurrencyConverterGui() {}
 
@@ -19,8 +21,13 @@ bool CurrencyConverterGui::init(QQmlApplicationEngine *engine)
 
     engine->addImportPath(":/");
 
+    m_service_manager = new ServiceManager();
 
     engine->rootContext()->setContextProperty("translator", m_translator.get());
+    engine->rootContext()->setContextProperty("serviceManager", m_service_manager.get());
+
+    qmlRegisterType<CurrencyOnExchangeModel>("com.preobrazhenskyi.currency_on_exchange_model", 1, 0, "CurrencyOnExchangeModel");
+    qmlRegisterType<CurrencyToExchangeModel>("com.preobrazhenskyi.currency_to_exchange_model", 1, 0, "CurrencyToExchangeModel");
 
     engine->load("qrc:/CurrencyConverterModules/Main.qml");
 

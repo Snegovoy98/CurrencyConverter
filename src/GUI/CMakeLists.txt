@@ -30,7 +30,7 @@ set(PRIVATE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/private")
 
 add_library(${CURRENT_PROJECT} ${SOURCE_APP} ${SOURCE_QRC})
 
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick QuickControls2 Gui Qml REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS  Quick QuickControls2 Gui Qml REQUIRED)
 
 target_link_libraries(${CURRENT_PROJECT}
                 PUBLIC
