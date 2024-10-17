@@ -68,7 +68,7 @@ Rectangle {
         id: currencyToExchangeTextField
         width: root.width - selectedCurrency.width
         placeholderText: qsTr("I receive")
-        selectByMouse: true
+        readOnly: true
 
         anchors {
             top: oneCurrencyOnChangedValue.bottom

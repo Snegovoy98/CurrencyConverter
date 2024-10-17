@@ -43,7 +43,7 @@ void ServiceManager::get(const QString &url, const QHash<QString, QVariant> &par
 
     if(!resultValues.isEmpty())
     {
-        emit replyGetted(QString(resultValues));
+        emit replyGetted(resultValues);
     }
 
     m_reply->deleteLater();
@@ -63,7 +63,7 @@ void ServiceManager::post(const QString &url, const QByteArray &data)
 
     if(!resultValues.isEmpty())
     {
-        emit replyGetted(QString(resultValues));
+        emit replyGetted(resultValues);
     }
 
     m_reply->deleteLater();

@@ -6,29 +6,15 @@ import QtQuick.Controls
 ComboBox {
     id: root
 
-    model: ListModel {
-        ListElement {
-            currency: "Dollar"
-            value: 41
-        }
-
-        ListElement {
-            currency: "Euro"
-            value: 42
-        }
-    }
-
-    textRole: "currency"
-
     delegate: ItemDelegate {
         id: itemDelegate
         width: root.width
         required property int index
-        required property string currency
+        required property string currency_value
 
         contentItem: Label {
             id: it
-            text: itemDelegate.currency
+            text: itemDelegate.currency_value
             color: "blue"
             elide: Text.ElideRight
             verticalAlignment: Text.AlignVCenter
