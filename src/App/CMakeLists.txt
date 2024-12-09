@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.21)
 
 set(CURRENT_PROJECT "${CMAKE_PROJECT_NAME}App")
 
@@ -12,6 +12,8 @@ file(GLOB SOURCE_APP
     "*.qrc"
     "Private/*.qrc"
     "apple/Assets.xcassets/*.icns"
+    "apple/LaunchScreen.storyboard"
+    "apple/Info.plist"
 )
 
 set(PUBLIC_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
@@ -25,11 +27,12 @@ set_source_files_properties(${app_icon_macos} PROPERTIES
                             MACOSX_PACKAGE_LOCATION "Resources"
 )
 
-if(${QT_VERSION_MAJOR} EQUAL 6)
-    qt_add_executable(${CMAKE_PROJECT_NAME} MACOSX_BUNDLE translations.qrc MANUAL_FINALIZATION ${SOURCE_APP} ${app_icon_macos})
-else()
-    add_executable(${CMAKE_PROJECT_NAME} MACOSX_BUNDLE translations.qrc  MANUAL_FINALIZATION ${SOURCE_APP} ${app_icon_macos})
-endif()
+qt6_add_executable(${CMAKE_PROJECT_NAME} MACOSX_BUNDLE translations.qrc
+                           "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/currencyConverterUI.qrc"
+                           "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/icons.qrc"
+                            MANUAL_FINALIZATION ${SOURCE_APP} ${app_icon_macos}
+                           "${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc"
+)
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC "${CMAKE_PROJECT_NAME}Gui")
@@ -42,7 +45,8 @@ file(MAKE_DIRECTORY ${TARGET_DIR})
 
 qt_standard_project_setup(REQUIRES 6.7)
 
-set(TS_FILES "translations/translations_en.ts"
+set(TS_FILES
+             "translations/translations_en.ts"
              "translations/translations_ru.ts"
              "translations/translations_fr.ts"
              "translations/translations_sp.ts"
@@ -50,18 +54,53 @@ set(TS_FILES "translations/translations_en.ts"
              "translations/translations_ua.ts"
 )
 
-qt6_add_translations(
-    TARGETS "${CMAKE_PROJECT_NAME}" "${CMAKE_PROJECT_NAME}Gui"
-    RESOURCE_PREFIX "/"
-    TS_FILES ${TS_FILES}
-)
-
 set_target_properties("${PROJECT_NAME}" PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER com.master.CurrencyConverter
+    MACOSX_BUNDLE_GUI_IDENTIFIER com.preobrazhenskyi.CurrencyConverter
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
     MACOSX_BUNDLE TRUE
     MACOSX_BUNDLE_ICON_FILE AppIcon.icns
     RESOURCE ${app_icon_macos}
 )
+
+IF(IOS)
+    add_custom_target("${CMAKE_PROJECT_NAME}_IOS"
+        DEPENDS ${GENERATED_QM_FILES}
+    )
+
+    add_custom_target("${CMAKE_PROJECT_NAME}Gui_IOS"
+        DEPENDS ${GENERATED_QM_FILES}
+    )
+
+    qt6_add_translations(
+         TARGETS "${CMAKE_PROJECT_NAME}_IOS" "${CMAKE_PROJECT_NAME}Gui_IOS"
+         TS_FILES ${TS_FILES}
+         QM_FILES_OUTPUT_VARIABLE GENERATED_QM_FILES
+    )
+
+    foreach(file ${GENERATED_QM_FILES})
+        get_filename_component(filename ${file} NAME)
+        set_source_files_properties(${file} PROPERTIES QT_RESOURCE_ALIAS ${filename})
+    endforeach()
+
+    qt6_add_resources(${CMAKE_PROJECT_NAME} "translations_source"
+        PREFIX "/"
+        FILES ${GENERATED_QM_FILES}
+    )
+
+    set_target_properties("${CMAKE_PROJECT_NAME}" PROPERTIES
+        MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/apple/Info.plist"
+        QT_IOS_LAUNCH_SCREEN "${CMAKE_CURRENT_SOURCE_DIR}/apple/LaunchScreen.storyboard"
+    )
+
+    #qt_finalize_executable(${CMAKE_PROJECT_NAME})
+ else()
+    qt6_add_translations(
+        TARGETS "${CMAKE_PROJECT_NAME}" "${CMAKE_PROJECT_NAME}Gui"
+        RESOURCE_PREFIX "/"
+        TS_FILES ${TS_FILES}
+)
+ endif()
+
+
 

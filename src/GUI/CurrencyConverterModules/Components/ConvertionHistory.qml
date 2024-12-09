@@ -2,7 +2,8 @@ pragma ComponentBehavior: Bound
 import QtQuick 2.15
 import QtQuick.Controls
 import QtQuick.Layouts
-import Gui
+import com.preobrazhenskyi.Constants 1.0
+import com.preobrazhenskyi.Theme 1.0
 
 ListView {
     id: control

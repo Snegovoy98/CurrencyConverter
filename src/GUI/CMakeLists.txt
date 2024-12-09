@@ -41,20 +41,7 @@ target_link_libraries(${CURRENT_PROJECT}
                 Qt${QT_VERSION_MAJOR}::QuickControls2
 )
 
-list(APPEND QML_FILES "CurrencyConverterModules/Common/Theme.qml"
-                      "CurrencyConverterModules/Common/Constants.qml"
-)
-
-set_source_files_properties(${QML_FILES} PROPERTIES
-    QT_QML_SINGLETON_TYPE TRUE
-)
-
-qt6_add_qml_module(${CURRENT_PROJECT}
-    URI "Gui"
-    PLUGIN_TARGET ${CURRENT_PROJECT}
-    VERSION 1.0
-    QML_FILES ${QML_FILES}
-)
+qt6_import_qml_plugins(${CURRENT_PROJECT})
 
 target_include_directories(${CURRENT_PROJECT} PUBLIC ${PUBLIC_INCLUDE_DIR})
 target_include_directories(${CURRENT_PROJECT} PRIVATE ${PRIVATE_INCLUDE_DIR})

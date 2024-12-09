@@ -4,12 +4,12 @@
 <context>
     <name>CurrencyConvertionCard</name>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="49"/>
+        <location filename="../../GUI/CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="48"/>
         <source>I changing</source>
         <translation>Меняю</translation>
     </message>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="70"/>
+        <location filename="../../GUI/CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="72"/>
         <source>I receive</source>
         <translation>Получаю</translation>
     </message>
@@ -33,11 +33,16 @@
     </message>
     <message>
         <location filename="../../GUI/CurrencyConverterModules/Common/LanguagesModel.qml" line="29"/>
+        <source>Spanish</source>
+        <translation>Испанский</translation>
+    </message>
+    <message>
+        <location filename="../../GUI/CurrencyConverterModules/Common/LanguagesModel.qml" line="36"/>
         <source>Russian</source>
         <translation>Русский</translation>
     </message>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Common/LanguagesModel.qml" line="36"/>
+        <location filename="../../GUI/CurrencyConverterModules/Common/LanguagesModel.qml" line="43"/>
         <source>Ukrainian</source>
         <translation>Украинский</translation>
     </message>
@@ -45,17 +50,17 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="13"/>
+        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="17"/>
         <source>Currency Converter</source>
         <translation>Конвертер Валют</translation>
     </message>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="20"/>
+        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="24"/>
         <source>Currency Exchange</source>
         <translation>Обмен валюты</translation>
     </message>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="154"/>
+        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="187"/>
         <source>Exchange</source>
         <translation>Обмен</translation>
     </message>

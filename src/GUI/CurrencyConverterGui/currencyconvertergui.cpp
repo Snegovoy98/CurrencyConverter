@@ -19,7 +19,7 @@ bool CurrencyConverterGui::init(QQmlApplicationEngine *engine)
 
     QQuickStyle::setStyle(m_os_style);
 
-    engine->addImportPath(":/");
+    engine->addImportPath("qrc:/");
 
     m_service_manager = new ServiceManager();
 
@@ -28,8 +28,11 @@ bool CurrencyConverterGui::init(QQmlApplicationEngine *engine)
 
     qmlRegisterType<CurrencyOnExchangeModel>("com.preobrazhenskyi.currency_on_exchange_model", 1, 0, "CurrencyOnExchangeModel");
     qmlRegisterType<CurrencyToExchangeModel>("com.preobrazhenskyi.currency_to_exchange_model", 1, 0, "CurrencyToExchangeModel");
+    qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/CurrencyConverterModules/Common/Constants.qml")), "com.preobrazhenskyi.Constants", 1, 0, "Constants");
+    qmlRegisterSingletonType(QUrl(QStringLiteral("qrc:/CurrencyConverterModules/Common/Theme.qml")), "com.preobrazhenskyi.Theme", 1, 0, "Theme");
 
-    engine->load("qrc:/CurrencyConverterModules/Main.qml");
+    const QUrl url("qrc:/CurrencyConverterModules/Main.qml");
+    engine->load(url);
 
     if(engine->rootObjects().isEmpty())
         return false;

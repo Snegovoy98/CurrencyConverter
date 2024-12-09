@@ -1,8 +1,9 @@
 pragma ComponentBehavior: Bound
-import QtQuick
+import QtQuick 2.15
 import QtQuick.Controls
 import QtQuick.Layouts
-import Gui
+import com.preobrazhenskyi.Constants 1.0
+import com.preobrazhenskyi.Theme 1.0
 import "./Components"
 import "./Common"
 import com.preobrazhenskyi.currency_on_exchange_model 1.0
@@ -10,8 +11,8 @@ import com.preobrazhenskyi.currency_to_exchange_model 1.0
 
 ApplicationWindow {
     id: mainPage
-    width: 640
-    height: 480
+    minimumWidth: 640
+    minimumHeight: 480
     visible: true
     title: qsTr("Currency Converter")
 
@@ -28,8 +29,8 @@ ApplicationWindow {
         ToolButton {
             id: lanugagesToolBar
             icon.source: "qrc:/private/language_button.svg"
-            icon.width: 25
-            icon.height: 25
+            icon.width: 30
+            icon.height: 30
 
             anchors {
                 right: parent.right
@@ -60,7 +61,7 @@ ApplicationWindow {
 
                 delegate: MenuItem {
                     width: menuView.width
-                    height: 25
+                    height: 35
                     spacing: 5
 
                     required property string source
@@ -71,7 +72,7 @@ ApplicationWindow {
                     icon.source: source
                     icon.color: color
                     text: title
-                    font.pointSize: Constants.languagesFontPointSize
+                   font.pointSize: Constants.languagesFontPointSize
 
                     onClicked: {
                         translator.setLanguage(code)
@@ -144,10 +145,9 @@ ApplicationWindow {
         CurrencyConvertionCard {
             id: currencyCard
             Layout.fillWidth: true
-            Layout.fillHeight: true
+            Layout.preferredHeight: 250
             Layout.leftMargin:  Constants.margins
             Layout.rightMargin: Constants.margins
-
             radius: 12
 
             border {
@@ -168,6 +168,7 @@ ApplicationWindow {
 
         CurrencyToExchangeModel {
             id: currencyToExchangeModel
+
             Component.onCompleted: {
                 serviceManager.replyGetted.connect(currencyToExchangeModel.parseReply)
             }
@@ -188,6 +189,7 @@ ApplicationWindow {
             Layout.preferredHeight: Constants.buttonsHeight
             highlighted: true
             Layout.alignment: Qt.AlignHCenter
+            Layout.bottomMargin: 5
         }
     }
 }
