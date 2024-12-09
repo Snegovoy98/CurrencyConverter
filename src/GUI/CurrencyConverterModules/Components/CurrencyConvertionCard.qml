@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls
-import Gui
+import com.preobrazhenskyi.Constants 1.0
+import com.preobrazhenskyi.Theme 1.0
 
 Rectangle {
     id: root
@@ -21,7 +22,6 @@ Rectangle {
             text: "Euro"
             color: Theme.currencyOnExchangedColor
             font.pointSize: Constants.currencyPointSize
-
             anchors.verticalCenter: parent.verticalCenter
         }
 
@@ -38,7 +38,6 @@ Rectangle {
             text: "USD"
             color: Theme.currencyToExchangedColor
             font.pointSize: Constants.currencyPointSize
-
             anchors.verticalCenter: parent.verticalCenter
         }
     }
@@ -51,7 +50,7 @@ Rectangle {
 
         anchors {
             top: selectedCurrency.bottom
-            topMargin: 10
+            topMargin: 30
             horizontalCenter: parent.horizontalCenter
         }
     }
@@ -61,7 +60,10 @@ Rectangle {
         font: currencyOnExchangeTextField.font
         text: "- Test = 12121223.1 USD"
         x: currencyOnExchangeTextField.x
-        anchors.top: currencyOnExchangeTextField.bottom
+        anchors {
+            top: currencyOnExchangeTextField.bottom
+            topMargin: 10
+        }
     }
 
     TextField {
@@ -72,7 +74,7 @@ Rectangle {
 
         anchors {
             top: oneCurrencyOnChangedValue.bottom
-            topMargin: 10
+            topMargin: 30
             horizontalCenter: parent.horizontalCenter
         }
     }
@@ -82,6 +84,9 @@ Rectangle {
         font: currencyOnExchangeTextField.font
         text: "- USD = 12121223.1 Euro"
         x: currencyToExchangeTextField.x
-        anchors.top: currencyToExchangeTextField.bottom
+        anchors{
+            top: currencyToExchangeTextField.bottom
+            topMargin: 10
+        }
     }
 }

@@ -1,5 +1,6 @@
 #include "translator.h"
 #include <QGuiApplication>
+#include <QDir>
 
 Translator::Translator(QQmlEngine *engine, QObject *parent)
     : QObject{parent}

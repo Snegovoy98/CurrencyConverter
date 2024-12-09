@@ -2,6 +2,8 @@ pragma ComponentBehavior: Bound
 
 import QtQuick 2.15
 import QtQuick.Controls
+import com.preobrazhenskyi.Constants 1.0
+import com.preobrazhenskyi.Theme 1.0
 
 ComboBox {
     id: root
