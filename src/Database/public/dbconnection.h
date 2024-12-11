@@ -5,22 +5,36 @@
 #include <QRunnable>
 #include <QSqlDatabase>
 
+/*!
+ * @brief The DBConnection class - uses for connection to SQLiteDB
+ */
 class DBConnection : public QObject, public QRunnable
 {
     Q_OBJECT
 public:
     DBConnection(const DBConnection &other) = delete;
     void operator=(const DBConnection &) = delete;
+    /*!
+     * @brief getInstance - create and return one instance of DBConnection class.
+     * @param database - current database connection.
+     * @return - instance of DBConnection class.
+     */
     static DBConnection *getInstance(QSqlDatabase * database);
     ~DBConnection();
+    /*!
+     * @brief  - open connection to database
+     */
     void run();
 signals:
 
  private:
      explicit DBConnection(QSqlDatabase * database, QObject *parent = nullptr);
-     void configureDatabase();
+     /*!
+      * @brief configureDatabase - configure database paramters.
+      */
+    void configureDatabase();
     static inline DBConnection *m_db_connection = nullptr;
-     QSqlDatabase * m_database = nullptr;
+    QSqlDatabase * m_database = nullptr;
     static inline QString m_filename;
 };
 
