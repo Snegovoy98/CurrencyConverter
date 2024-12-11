@@ -25,13 +25,14 @@ endif()
 
 find_package(QT${QT_VERSION_MAJOR} COMPONENTS Core Test QUIET)
 
-if(IOS OR WIN32)
+if(IOS)
     option(CurrencyConvertor_Test "This option enabled or disabled app test" OFF)
 else()
     option(CurrencyConvertor_Test "This option enabled or disabled app test" ON)
 endif()
 
 add_subdirectory(src/Interfaces)
+add_subdirectory(src/Database)
 add_subdirectory(src/Core)
 
 if(CurrencyConvertor_APP)
@@ -51,6 +52,7 @@ include(GNUInstallDirs)
 install(TARGETS
     "${PROJECT_NAME}"
     "${PROJECT_NAME}Core"
+    "${PROJECT_NAME}Database"
     "${PROJECT_NAME}Gui"
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

@@ -19,7 +19,7 @@ file(GLOB SOURCE_APP
 set(PUBLIC_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(PRIVATE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Private")
 
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Concurrent LinguistTools QUIET)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Concurrent Sql LinguistTools QUIET)
 
 set(app_icon_macos "${CMAKE_CURRENT_SOURCE_DIR}/apple/Assets.xcassets/AppIcon.icns")
 
@@ -34,8 +34,13 @@ qt6_add_executable(${CMAKE_PROJECT_NAME} MACOSX_BUNDLE translations.qrc
                            "${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc"
 )
 
-target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC Qt${QT_VERSION_MAJOR}::Core)
-target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC "${CMAKE_PROJECT_NAME}Gui")
+target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
+                                                                        Qt${QT_VERSION_MAJOR}::Core
+                                                                        Qt${QT_VERSION_MAJOR}::Sql)
+
+target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
+                                                                        "${CMAKE_PROJECT_NAME}Gui"
+                                                                        "${CMAKE_PROJECT_NAME}Database")
 
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC ${PUBLIC_INCLUDE_DIR})
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${PRIVATE_INCLUDE_DIR})
@@ -93,8 +98,7 @@ IF(IOS)
         QT_IOS_LAUNCH_SCREEN "${CMAKE_CURRENT_SOURCE_DIR}/apple/LaunchScreen.storyboard"
     )
 
-    #qt_finalize_executable(${CMAKE_PROJECT_NAME})
- else()
+else()
     qt6_add_translations(
         TARGETS "${CMAKE_PROJECT_NAME}" "${CMAKE_PROJECT_NAME}Gui"
         RESOURCE_PREFIX "/"
