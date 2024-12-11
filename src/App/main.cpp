@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     app.setFont(QFont(QFontDatabase::families().at(8)));
 
     QSqlDatabase database = QSqlDatabase::database();
-    DBConnection *connection = DBConnection::GetInstance(&database);
+    DBConnection *connection = DBConnection::getInstance(&database);
 
     QThreadPool pool = QThreadPool::globalInstance();
     pool.start(connection);

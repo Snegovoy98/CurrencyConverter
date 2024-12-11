@@ -11,7 +11,7 @@ class DBConnection : public QObject, public QRunnable
 public:
     DBConnection(const DBConnection &other) = delete;
     void operator=(const DBConnection &) = delete;
-    static DBConnection *GetInstance(QSqlDatabase * database);
+    static DBConnection *getInstance(QSqlDatabase * database);
     ~DBConnection();
     void run();
 signals:
@@ -19,9 +19,9 @@ signals:
  private:
      explicit DBConnection(QSqlDatabase * database, QObject *parent = nullptr);
      void configureDatabase();
-    static inline DBConnection *dbConnection = nullptr;
-     QSqlDatabase * database = nullptr;
-    static inline QString filename;
+    static inline DBConnection *m_db_connection = nullptr;
+     QSqlDatabase * m_database = nullptr;
+    static inline QString m_filename;
 };
 
 #endif // DBCONNECTION_H

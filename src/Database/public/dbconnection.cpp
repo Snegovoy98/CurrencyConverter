@@ -7,19 +7,19 @@
 DBConnection::DBConnection(QSqlDatabase * database, QObject *parent)
     : QObject{parent}
 {
-    this->database = database;
+    this->m_database = database;
     configureDatabase();
 }
 
 void DBConnection::configureDatabase()
 {
-    if(!this->database->isValid())
+    if(!this->m_database->isValid())
     {
-        this->database = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
+        this->m_database = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
 
-        if(!database->isValid())
+        if(!m_database->isValid())
         {
-            qFatal("Cannot add database: %s", qPrintable(database->lastError().text()));
+            qFatal("Cannot add database: %s", qPrintable(m_database->lastError().text()));
         }
     }
 
@@ -30,31 +30,31 @@ void DBConnection::configureDatabase()
         qFatal("Failed create writable directory at %s", qPrintable(dbLocation.absolutePath()));
     }
 
-    filename = dbLocation.absolutePath() + "/convertions_db.sqlite3";
-    database->setDatabaseName(filename);
+    m_filename = dbLocation.absolutePath() + "/convertions_db.sqlite3";
+    m_database->setDatabaseName(m_filename);
 }
 
-DBConnection *DBConnection::GetInstance(QSqlDatabase *database)
+DBConnection *DBConnection::getInstance(QSqlDatabase *database)
 {
-    if(dbConnection == nullptr) {
-        dbConnection = new DBConnection(database);
+    if(m_db_connection == nullptr) {
+        m_db_connection = new DBConnection(database);
     }
 
-    return dbConnection;
+    return m_db_connection;
 }
 
 DBConnection::~DBConnection()
 {
-    delete database;
+    delete m_database;
 }
 
 void DBConnection::run()
 {
-   bool isOpen =  database->open();
+   bool isOpen = m_database->open();
 
    if(!isOpen)
    {
-       qFatal("Cannot open database: %s", qPrintable(database->lastError().text()));
-       QFile::remove(filename);
+       qFatal("Cannot open database: %s", qPrintable(m_database->lastError().text()));
+       QFile::remove(m_filename);
    }
 }
