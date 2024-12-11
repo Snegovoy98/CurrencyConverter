@@ -1,7 +1,10 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QFontDatabase>
+#include <QSqlDatabase>
+#include <QThreadPool>
 #include "CurrencyConverterGui/currencyconvertergui.h"
+#include "../Database/public/dbconnection.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,6 +20,12 @@ int main(int argc, char *argv[])
         Qt::QueuedConnection);
 
     app.setFont(QFont(QFontDatabase::families().at(8)));
+
+    QSqlDatabase database = QSqlDatabase::database();
+    DBConnection *connection = DBConnection::GetInstance(&database);
+
+    QThreadPool pool = QThreadPool::globalInstance();
+    pool.start(connection);
 
     CurrencyConverterGui currencyConverterGui;
 
