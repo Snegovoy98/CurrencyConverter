@@ -8,6 +8,7 @@ import "./Components"
 import "./Common"
 import com.preobrazhenskyi.currency_on_exchange_model 1.0
 import com.preobrazhenskyi.currency_to_exchange_model 1.0
+import com.preobrazhenskyi.history_exchanges_model 1.0
 
 ApplicationWindow {
     id: mainPage
@@ -115,6 +116,10 @@ ApplicationWindow {
                 model: currencyOnExchangeModel
                 textRole: "currency_value"
                 valueRole: "currency_code"
+
+                onCurrentTextChanged: {
+                    currencyCard.currencyOnChanged = selectionOnChanged.currentText
+                }
             }
 
             RoundButton {
@@ -139,6 +144,10 @@ ApplicationWindow {
                 currentIndex: 1
                 model: currencyToExchangeModel
                 textRole: "currency_value"
+
+                onCurrentTextChanged: {
+                    currencyCard.currencyToChanged = selectionToChanged.currentText
+                }
             }
         }
 
@@ -174,12 +183,20 @@ ApplicationWindow {
             }
         }
 
+        HistoryExchangesModel {
+            id: historyExchangesModel
+
+            Component.onCompleted:  historyExchangesModel.fetchExchangesHistory()
+        }
+
         ConvertionHistory {
             id: convertionHistory
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.leftMargin:  Constants.margins
             Layout.rightMargin: Constants.margins
+
+            model: historyExchangesModel
         }
 
         Button {
@@ -190,6 +207,19 @@ ApplicationWindow {
             highlighted: true
             Layout.alignment: Qt.AlignHCenter
             Layout.bottomMargin: 5
+
+            onClicked: {
+                if(!currencyCard.validate()) {
+                    historyExchangesModel.saveHistory(selectionOnChanged.currentText,
+                                                                    parseFloat(currencyCard.currencyOnExchangeTextField.text),
+                                                                    selectionToChanged.currentText,
+                                                                    parseFloat(currencyCard.currencyToExchangeTextField.text))
+                } else {
+                    if(!currencyCard.currencyOnExchangeTextField.focus) {
+                         currencyCard.currencyOnExchangeTextField.focus = true
+                    }
+                }
+            }
         }
     }
 }

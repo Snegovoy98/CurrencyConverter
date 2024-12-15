@@ -11,6 +11,9 @@ file(GLOB SOURCE_CPP
 
         "public/*.cpp"
         "private/*.cpp"
+
+        "private/sql_scripts/*.sql"
+        "private/*.qrc"
     )
 
 add_library(${CURRENT_PROJECT} ${SOURCE_CPP})

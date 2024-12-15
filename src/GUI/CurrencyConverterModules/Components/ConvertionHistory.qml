@@ -8,11 +8,14 @@ import com.preobrazhenskyi.Theme 1.0
 ListView {
     id: control
 
-    model: ListModel {
-        ListElement {
-          currency_title: "USD"
-          value_per_unit: 41.121223123
-          coverted_value: 3888
+    clip: true
+
+    Label {
+        id: message
+        text: qsTr("There is not data")
+        visible: control.count == 0
+        anchors {
+            horizontalCenter: parent.horizontalCenter
         }
     }
 
@@ -21,9 +24,10 @@ ListView {
         width: control.width
         height: 50
 
-        required property string currency_title
+        required property string currency_on_exchange_title
         required property double value_per_unit
-        required property double coverted_value
+        required property string currency_to_exchange_title
+        required property double exchanged_sum
 
         RowLayout {
             anchors.fill: parent
@@ -35,7 +39,7 @@ ListView {
                 Layout.leftMargin: Constants.margins
 
                 Label {
-                    text: convertionHistoryDelegate.currency_title
+                    text: convertionHistoryDelegate.currency_to_exchange_title
                     font.pointSize: Constants.mainFontPointSize
                 }
 
@@ -53,7 +57,12 @@ ListView {
                 Layout.rightMargin: Constants.margins
 
                 Label {
-                    text: convertionHistoryDelegate.coverted_value
+                    text: convertionHistoryDelegate.currency_on_exchange_title
+                    font.pointSize: Constants.mainFontPointSize
+                }
+
+                Label {
+                    text: convertionHistoryDelegate.exchanged_sum
                     font.pointSize: Constants.mainFontPointSize
                     color: Theme.currencyOnExchangedColor
                 }

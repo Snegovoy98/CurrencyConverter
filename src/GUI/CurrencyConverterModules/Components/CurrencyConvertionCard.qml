@@ -5,7 +5,14 @@ import com.preobrazhenskyi.Theme 1.0
 
 Rectangle {
     id: root
-    property alias currencyonChanged: currencyOnChangedTitle.text
+    property alias currencyOnChanged: currencyOnChangedTitle.text
+    property alias currencyToChanged: currencyToChangedTitle.text
+    property alias currencyOnExchangeTextField: currencyOnExchangeTextField
+    property alias currencyToExchangeTextField: currencyToExchangeTextField
+
+    function validate() {
+        return currencyOnExchangeTextField.text == ""
+    }
 
     Row {
         id: selectedCurrency
@@ -19,7 +26,6 @@ Rectangle {
 
         Label {
             id: currencyOnChangedTitle
-            text: "Euro"
             color: Theme.currencyOnExchangedColor
             font.pointSize: Constants.currencyPointSize
             anchors.verticalCenter: parent.verticalCenter
@@ -35,7 +41,6 @@ Rectangle {
 
         Label {
             id: currencyToChangedTitle
-            text: "USD"
             color: Theme.currencyToExchangedColor
             font.pointSize: Constants.currencyPointSize
             anchors.verticalCenter: parent.verticalCenter
