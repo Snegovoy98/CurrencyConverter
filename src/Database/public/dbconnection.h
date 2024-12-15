@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QRunnable>
 #include <QSqlDatabase>
+#include "sqlscriptexecutor.h"
+#include <QScopedPointer>
 
 /*!
  * @brief The DBConnection class - uses for connection to SQLiteDB
@@ -26,7 +28,7 @@ public:
      */
     void run();
 signals:
-
+    void dbOpened();
  private:
      explicit DBConnection(QSqlDatabase * database, QObject *parent = nullptr);
      /*!
@@ -36,6 +38,7 @@ signals:
     static inline DBConnection *m_db_connection = nullptr;
     QSqlDatabase * m_database = nullptr;
     static inline QString m_filename;
+    QScopedPointer<SQLScriptExecutor> m_executor;
 };
 
 #endif // DBCONNECTION_H

@@ -8,6 +8,7 @@ DBConnection::DBConnection(QSqlDatabase * database, QObject *parent)
     : QObject{parent}
 {
     this->m_database = database;
+    m_executor.reset(new SQLScriptExecutor());
     configureDatabase();
 }
 
@@ -15,7 +16,7 @@ void DBConnection::configureDatabase()
 {
     if(!this->m_database->isValid())
     {
-        this->m_database = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
+        this->m_database = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE", "mainConnection"));
 
         if(!m_database->isValid())
         {
@@ -57,4 +58,6 @@ void DBConnection::run()
        qFatal("Cannot open database: %s", qPrintable(m_database->lastError().text()));
        QFile::remove(m_filename);
    }
+
+   m_executor->createTables();
 }

@@ -2,14 +2,22 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>ConvertionHistory</name>
+    <message>
+        <location filename="../../GUI/CurrencyConverterModules/Components/ConvertionHistory.qml" line="15"/>
+        <source>There is not data</source>
+        <translation>There is not data</translation>
+    </message>
+</context>
+<context>
     <name>CurrencyConvertionCard</name>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="48"/>
+        <location filename="../../GUI/CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="53"/>
         <source>I changing</source>
         <translation>I changing</translation>
     </message>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="72"/>
+        <location filename="../../GUI/CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="84"/>
         <source>I receive</source>
         <translation>I receive</translation>
     </message>
@@ -50,17 +58,17 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="17"/>
+        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="18"/>
         <source>Currency Converter</source>
         <translation>Currency Converter</translation>
     </message>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="24"/>
+        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="25"/>
         <source>Currency Exchange</source>
         <translation>Currency Exchange</translation>
     </message>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="187"/>
+        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="204"/>
         <source>Exchange</source>
         <translation>Exchange</translation>
     </message>

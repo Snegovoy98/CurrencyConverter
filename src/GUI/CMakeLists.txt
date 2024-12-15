@@ -30,15 +30,17 @@ set(PRIVATE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/private")
 
 add_library(${CURRENT_PROJECT} ${SOURCE_APP} ${SOURCE_QRC})
 
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS  Quick QuickControls2 Gui Qml REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS  Quick QuickControls2 Gui Sql Qml REQUIRED)
 
 target_link_libraries(${CURRENT_PROJECT}
                 PUBLIC
                 "${PROJECT_NAME}Core"
+                "${PROJECT_NAME}Database"
                 Qt${QT_VERSION_MAJOR}::Quick
                 Qt${QT_VERSION_MAJOR}::Gui
                 Qt${QT_VERSION_MAJOR}::Qml
                 Qt${QT_VERSION_MAJOR}::QuickControls2
+                 Qt${QT_VERSION_MAJOR}::Sql
 )
 
 qt6_import_qml_plugins(${CURRENT_PROJECT})
