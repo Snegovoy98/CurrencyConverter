@@ -3,7 +3,7 @@
 
 #include <QAbstractListModel>
 #include <QObject>
-#include <QtCore/qdatetime.h>
+#include <QDateTime>
 #include "../Database/public/dbworker.h"
 
 class HistoryExchangesModel : public QAbstractListModel

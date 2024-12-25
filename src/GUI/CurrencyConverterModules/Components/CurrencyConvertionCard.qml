@@ -9,6 +9,7 @@ Rectangle {
     property alias currencyToChanged: currencyToChangedTitle.text
     property alias currencyOnExchangeTextField: currencyOnExchangeTextField
     property alias currencyToExchangeTextField: currencyToExchangeTextField
+    property double crossRate: 0.00
 
     function validate() {
         return currencyOnExchangeTextField.text == ""
@@ -57,6 +58,19 @@ Rectangle {
             top: selectedCurrency.bottom
             topMargin: 30
             horizontalCenter: parent.horizontalCenter
+        }
+
+        validator: DoubleValidator{
+            locale: "en"
+            decimals: 2
+        }
+
+        onTextChanged: {
+             if(text != "") {
+                currencyToExchangeTextField.text = parseFloat(text) * root.crossRate
+             } else {
+                currencyToExchangeTextField.clear()
+            }
         }
     }
 

@@ -5,7 +5,7 @@ QtObject {
     property int buttonsSize: 30
     property int borderWidth: 1
     property int margins: 20
-    property int buttonsWidth: 120
+    property int buttonsWidth: 160
     property int buttonsHeight: 50
     property int comboboxWidth: 220
     property int comboboxHeight: 70

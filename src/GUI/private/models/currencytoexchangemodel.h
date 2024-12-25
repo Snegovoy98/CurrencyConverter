@@ -2,23 +2,20 @@
 #define CURRENCYTOEXCHANGEMODEL_H
 
 #include <QAbstractListModel>
-#include "../../../Interfaces/public/ICurrencyModel.h"
+#include "../Database/public/dbworker.h"
 
-class CurrencyToExchangeModel : public QAbstractListModel, public ICurrencyModel
+class CurrencyToExchangeModel : public QAbstractListModel
 {
     Q_OBJECT
 
     enum Roles {
-        CurrencyToExchangeValue = Qt::UserRole + 1,
-        Date,
+        CurrencyToExchangeTitle = Qt::UserRole + 1,
         CrossRate
     };
 
     struct CurrencyToExchangeData
     {
-        int currency_on_exchange_code;
-        QString currency_to_exchange_value;
-        QString date;
+        QString currency_to_exchange_title;
         double rate_cross;
     };
 
@@ -28,15 +25,17 @@ public:
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
     QHash<int, QByteArray> roleNames() const;
-    void fetchCurrencyData();
 
-public slots:
-    void parseReply(const QByteArray &reply);
+    /*!
+     * @brief fetchCurrencyData -  this method fetch data from the database.
+     * @param currencyCode - currency_on_exchange_code
+     */
+    Q_INVOKABLE void fetchCurrencyData(const int &currencyCode);
 
 private:
+    DBWorker *m_db_worker = nullptr;
     static inline QHash<int, QByteArray> m_roles;
     QList<CurrencyToExchangeData> m_currencies_to_exchange;
-    QMap<int, QString> m_currencies;
 };
 
 #endif // CURRENCYTOEXCHANGEMODEL_H

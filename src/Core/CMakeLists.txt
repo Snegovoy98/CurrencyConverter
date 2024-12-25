@@ -26,9 +26,15 @@ set(PRIVATE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/private")
 
 add_library(${CURRENT_PROJECT} ${SOURCE_APP} ${SOURCE_QRC})
 
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Concurrent  Core REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Sql Concurrent  Core REQUIRED)
 
-target_link_libraries(${CURRENT_PROJECT} PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Network)
+target_link_libraries(${CURRENT_PROJECT} PUBLIC
+                                                                "${PROJECT_NAME}Database"
+                                                                PRIVATE
+                                                                Qt${QT_VERSION_MAJOR}::Core
+                                                                Qt${QT_VERSION_MAJOR}::Network
+                                                                Qt${QT_VERSION_MAJOR}::Sql
+                             )
 
 target_include_directories(${CURRENT_PROJECT} PUBLIC ${PUBLIC_INCLUDE_DIR})
 target_include_directories(${CURRENT_PROJECT} PRIVATE ${PRIVATE_INCLUDE_DIR})

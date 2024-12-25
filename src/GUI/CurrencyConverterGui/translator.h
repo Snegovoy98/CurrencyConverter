@@ -3,8 +3,9 @@
 
 #include <QObject>
 #include <QTranslator>
-#include <QPointer>
+#include <QScopedPointer>
 #include <QQmlEngine>
+#include "../Database/public/dbworker.h"
 
 class Translator : public QObject
 {
@@ -17,8 +18,10 @@ signals:
     void errorChanged(const QString &error);
 
 private:
+    const QString loadSavedLanguage();
     QQmlEngine *m_engine = nullptr;
-    QPointer<QTranslator> m_translator;
+    QScopedPointer<QTranslator> m_translator;
+    DBWorker *m_db_worker;
 };
 
 #endif // TRANSLATOR_H

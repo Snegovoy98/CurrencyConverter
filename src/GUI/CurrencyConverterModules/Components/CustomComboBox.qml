@@ -11,12 +11,13 @@ ComboBox {
     delegate: ItemDelegate {
         id: itemDelegate
         width: root.width
+
         required property int index
-        required property string currency_value
+        required property string currency_title
 
         contentItem: Label {
             id: it
-            text: itemDelegate.currency_value
+            text: itemDelegate.currency_title
             color: "blue"
             elide: Text.ElideRight
             verticalAlignment: Text.AlignVCenter
