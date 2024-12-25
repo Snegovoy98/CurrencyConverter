@@ -12,12 +12,12 @@
 <context>
     <name>CurrencyConvertionCard</name>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="53"/>
+        <location filename="../../GUI/CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="54"/>
         <source>I changing</source>
         <translation>Je change</translation>
     </message>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="84"/>
+        <location filename="../../GUI/CurrencyConverterModules/Components/CurrencyConvertionCard.qml" line="91"/>
         <source>I receive</source>
         <translation>Je reçois</translation>
     </message>
@@ -68,9 +68,9 @@
         <translation>Change de devises</translation>
     </message>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="204"/>
-        <source>Exchange</source>
-        <translation>Échange</translation>
+        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="200"/>
+        <source>Save to history</source>
+        <translation>Enregistrer dans l&apos;historique</translation>
     </message>
 </context>
 </TS>

@@ -10,7 +10,8 @@ CurrencyConverterGui::CurrencyConverterGui() {}
 
 bool CurrencyConverterGui::init(QQmlApplicationEngine *engine)
 {
-    m_translator = new Translator(engine);
+    m_translator.reset(new Translator(engine));
+    m_settings_worker.reset(new SettingsWorker());
 
     #ifdef Q_OS_MACOS
         m_os_style = "macOS";
@@ -22,10 +23,8 @@ bool CurrencyConverterGui::init(QQmlApplicationEngine *engine)
 
     engine->addImportPath("qrc:/");
 
-    m_service_manager = new ServiceManager();
-
     engine->rootContext()->setContextProperty("translator", m_translator.get());
-    engine->rootContext()->setContextProperty("serviceManager", m_service_manager.get());
+    engine->rootContext()->setContextProperty("settingsWorker", m_settings_worker.get());
 
     qmlRegisterType<CurrencyOnExchangeModel>("com.preobrazhenskyi.currency_on_exchange_model", 1, 0, "CurrencyOnExchangeModel");
     qmlRegisterType<CurrencyToExchangeModel>("com.preobrazhenskyi.currency_to_exchange_model", 1, 0, "CurrencyToExchangeModel");

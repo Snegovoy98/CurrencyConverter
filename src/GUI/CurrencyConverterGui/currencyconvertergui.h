@@ -2,9 +2,9 @@
 #define CURRENCYCONVERTERGUI_H
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QPointer>
-#include "CurrencyConverter/utility/servicemanager.h"
+#include <QScopedPointer>
 #include "translator.h"
+#include "../../Core/public/CurrencyConverter/utility/settingsworker.h"
 
 class CurrencyConverterGui
 {
@@ -15,8 +15,8 @@ public:
 
 private:
     QString m_os_style;
-    QPointer<Translator> m_translator = nullptr;
-    QPointer<ServiceManager> m_service_manager;
+    QScopedPointer<Translator> m_translator;
+    QScopedPointer<SettingsWorker> m_settings_worker;
 };
 
 #endif // CURRENCYCONVERTERGUI_H

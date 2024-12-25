@@ -77,6 +77,7 @@ ApplicationWindow {
 
                     onClicked: {
                         translator.setLanguage(code)
+                        settingsWorker.saveSettings("language",  code)
                         languagesMenu.close()
                     }
                 }
@@ -114,12 +115,12 @@ ApplicationWindow {
                 Layout.leftMargin: Constants.margins
                 currentIndex: 0
                 model: currencyOnExchangeModel
-                textRole: "currency_value"
+                textRole: "currency_title"
                 valueRole: "currency_code"
 
-                onCurrentTextChanged: {
-                    currencyCard.currencyOnChanged = selectionOnChanged.currentText
-                }
+                onCurrentTextChanged:  currencyCard.currencyOnChanged = selectionOnChanged.currentText
+
+                onCurrentValueChanged:  currencyToExchangeModel.fetchCurrencyData(selectionOnChanged.currentValue)
             }
 
             RoundButton {
@@ -141,12 +142,17 @@ ApplicationWindow {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                 Layout.rightMargin: Constants.margins
-                currentIndex: 1
+                currentIndex: 0
                 model: currencyToExchangeModel
-                textRole: "currency_value"
+                textRole: "currency_title"
+                valueRole: "cross_rate"
 
-                onCurrentTextChanged: {
-                    currencyCard.currencyToChanged = selectionToChanged.currentText
+                onCurrentTextChanged:  currencyCard.currencyToChanged = selectionToChanged.currentText
+
+                onCurrentValueChanged:  {
+                    if(currencyCard.crossRate !== undefined) {
+                        currencyCard.crossRate = currentValue
+                    }
                 }
             }
         }
@@ -163,24 +169,14 @@ ApplicationWindow {
                 width: Constants.borderWidth
                 color: Theme.borderStyleColor
             }
-
-            Component.onCompleted: serviceManager.get("https://api.monobank.ua/bank/currency")
         }
 
         CurrencyOnExchangeModel {
             id: currencyOnExchangeModel
-
-            Component.onCompleted: {
-                serviceManager.replyGetted.connect(currencyOnExchangeModel.parseReply)
-            }
         }
 
         CurrencyToExchangeModel {
             id: currencyToExchangeModel
-
-            Component.onCompleted: {
-                serviceManager.replyGetted.connect(currencyToExchangeModel.parseReply)
-            }
         }
 
         HistoryExchangesModel {
@@ -201,7 +197,7 @@ ApplicationWindow {
 
         Button {
             id: convertionButton
-            text: qsTr("Exchange")
+            text: qsTr("Save to history")
             Layout.preferredWidth: Constants.buttonsWidth
             Layout.preferredHeight: Constants.buttonsHeight
             highlighted: true

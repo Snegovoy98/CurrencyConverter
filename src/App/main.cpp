@@ -5,6 +5,7 @@
 #include <QThreadPool>
 #include "CurrencyConverterGui/currencyconvertergui.h"
 #include "../Database/public/dbconnection.h"
+#include "../Core/public/CurrencyConverter/utility/currenciesloader.h"
 
 int main(int argc, char *argv[])
 {
@@ -26,6 +27,10 @@ int main(int argc, char *argv[])
 
     QThreadPool pool = QThreadPool::globalInstance();
     pool.start(connection);
+
+    CurrenciesLoader currenciesLoader;
+
+    QObject::connect(&app, &QGuiApplication::lastWindowClosed, &currenciesLoader, &CurrenciesLoader::saveLastActivity);
 
     CurrencyConverterGui currencyConverterGui;
 

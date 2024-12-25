@@ -3,25 +3,25 @@
 
 #include <QAbstractListModel>
 #include <QPointer>
-#include "../../../Interfaces/public/ICurrencyModel.h"
+#include "../Database/public/dbworker.h"
 
 /*!
  * @brief The CurrencyOnExchangeModel class - model which store currency data for exchange.
  */
-class CurrencyOnExchangeModel : public QAbstractListModel, public ICurrencyModel
+class CurrencyOnExchangeModel : public QAbstractListModel
 {
     Q_OBJECT
 
     enum Roles
     {
         CurrencyOnExchangeCode = Qt::UserRole + 1,
-        CurrencyOnExchangeValue
+        CurrencyOnExchangeTitle
     };
 
     struct CurrencyOnExchange
     {
         int currency_code;
-        QString currency_value;
+        QString currency_title;
     };
 
 public:
@@ -32,17 +32,14 @@ public:
    QHash<int, QByteArray> roleNames() const override;
 
    /*!
-    * @brief fetchCurrencyData - this method fetch data from the service.
+    * @brief fetchCurrencyData - this method fetch data from the database.
     */
-   Q_INVOKABLE void fetchCurrencyData() override;
+   void fetchCurrencyData();
 
-public slots:
-   void parseReply(const QByteArray &reply) override;
-
-private: 
+private:
+   DBWorker *m_db_worker = nullptr;
    static inline QHash<int, QByteArray> m_roles;
    QList<CurrencyOnExchange> m_currencies_on_exchange;
-   QMap<int, QString> m_currencies;
 };
 
 #endif // CURRENCYONEXCHANGEMODEL_H

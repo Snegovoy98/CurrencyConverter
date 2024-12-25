@@ -5,7 +5,7 @@
 class ICurrencyModel {
 public:
     virtual void fetchCurrencyData() = 0;
-    virtual void parseReply(const QByteArray &reply) = 0;
+    virtual void fetchCurrencyData(const int &currencyCode) = 0;
 };
 
 #endif // ICURRENCYMODEL_H
