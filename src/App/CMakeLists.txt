@@ -32,6 +32,7 @@ qt6_add_executable(${CMAKE_PROJECT_NAME} MACOSX_BUNDLE translations.qrc
                            "${CMAKE_CURRENT_SOURCE_DIR}/../GUI/icons.qrc"
                             MANUAL_FINALIZATION ${SOURCE_APP} ${app_icon_macos}
                            "${CMAKE_CURRENT_SOURCE_DIR}/translations.qrc"
+                           "${CMAKE_CURRENT_SOURCE_DIR}/../Database/private/sql_scripts.qrc"
 )
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC

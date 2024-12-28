@@ -72,6 +72,7 @@ void DBWorker::loadCurrenciesToDB(const QJsonDocument &document)
     m_semaphore->acquire();
     ++connectionsCount;
     QString number = QString::number(connectionsCount);
+
     {
         QSqlDatabase dbConnection = QSqlDatabase::cloneDatabase("mainConnection", m_db_connection_name + number);
          dbConnection.open();
@@ -110,6 +111,7 @@ void DBWorker::clearCurrencies()
     m_semaphore->acquire();
     ++connectionsCount;
     QString number = QString::number(connectionsCount);
+
     {
         QSqlDatabase dbConnection = QSqlDatabase::cloneDatabase("mainConnection", m_db_connection_name + number);
         dbConnection.open();
@@ -121,6 +123,7 @@ void DBWorker::clearCurrencies()
             emit errorHappened(query.lastError().text());
         }
     }
+
     m_semaphore->release();
 }
 
@@ -194,8 +197,8 @@ const QSqlQuery *DBWorker::getCurrenciesToExchangeByOnExchangeCode(const int &on
         emit errorHappened(m_query->lastError().text());
     }
 
-    m_semaphore->release();
     return m_query.get();
+    m_semaphore->release();
 }
 
 bool DBWorker::isSettingExists(const QString &settingName)
@@ -209,8 +212,8 @@ bool DBWorker::isSettingExists(const QString &settingName)
         emit errorHappened(m_query->lastError().text());
     }
 
-    m_semaphore->release();
     return m_query->first();
+    m_semaphore->release();
 }
 
 

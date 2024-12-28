@@ -49,7 +49,7 @@ ApplicationWindow {
 
         Menu {
             id: languagesMenu
-            width: 125
+            width: 140
             x: lanugagesToolBar.x - 15
             y: lanugagesToolBar.y + 35
 
@@ -60,7 +60,7 @@ ApplicationWindow {
 
                 model: LanguagesModel {}
 
-                delegate: MenuItem {
+                delegate: ItemDelegate {
                     width: menuView.width
                     height: 35
                     spacing: 5
@@ -73,7 +73,7 @@ ApplicationWindow {
                     icon.source: source
                     icon.color: color
                     text: title
-                   font.pointSize: Constants.languagesFontPointSize
+                    font.pointSize: Constants.languagesFontPointSize
 
                     onClicked: {
                         translator.setLanguage(code)

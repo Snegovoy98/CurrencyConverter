@@ -77,7 +77,7 @@ Rectangle {
     Label {
         id: oneCurrencyOnChangedValue
         font: currencyOnExchangeTextField.font
-        text: "- Test = 12121223.1 USD"
+        text: currencyOnChangedTitle.text
         x: currencyOnExchangeTextField.x
         anchors {
             top: currencyOnExchangeTextField.bottom
@@ -101,7 +101,7 @@ Rectangle {
     Label {
         id: oneCurrencyToChangedValue
         font: currencyOnExchangeTextField.font
-        text: "- USD = 12121223.1 Euro"
+        text: "1 " + currencyToChangedTitle.text + " = " + root.crossRate + " "  +  currencyOnChangedTitle.text
         x: currencyToExchangeTextField.x
         anchors{
             top: currencyToExchangeTextField.bottom

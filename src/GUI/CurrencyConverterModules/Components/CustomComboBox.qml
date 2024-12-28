@@ -8,6 +8,8 @@ import com.preobrazhenskyi.Theme 1.0
 ComboBox {
     id: root
 
+    popup.height: count > 7? 200 : root.popup.contentHeight
+
     delegate: ItemDelegate {
         id: itemDelegate
         width: root.width
