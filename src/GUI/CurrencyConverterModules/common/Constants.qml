@@ -12,4 +12,5 @@ QtObject {
     property int languagesFontPointSize: 10
     property int mainFontPointSize: 14
     property int currencyPointSize: 16
+    readonly property int currenciesNumbersAfterDot: 2
 }
