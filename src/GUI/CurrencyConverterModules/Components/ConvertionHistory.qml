@@ -44,7 +44,7 @@ ListView {
                 }
 
                 Label {
-                    text: convertionHistoryDelegate.value_per_unit
+                    text: convertionHistoryDelegate.value_per_unit.toFixed(Constants.currenciesNumbersAfterDot)
                     font.pointSize: Constants.mainFontPointSize
                     color: "grey"
                 }
@@ -63,7 +63,7 @@ ListView {
                 }
 
                 Label {
-                    text: convertionHistoryDelegate.exchanged_sum
+                    text: convertionHistoryDelegate.exchanged_sum.toFixed(Constants.currenciesNumbersAfterDot)
                     font.pointSize: Constants.mainFontPointSize
                     color: Theme.currencyOnExchangedColor
                 }
