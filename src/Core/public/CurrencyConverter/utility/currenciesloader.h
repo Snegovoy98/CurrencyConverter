@@ -12,7 +12,6 @@ class CurrenciesLoader : public QObject
 public:
     explicit CurrenciesLoader(QObject *parent = nullptr);
 
-
 public slots:
     void saveLastActivity();
 

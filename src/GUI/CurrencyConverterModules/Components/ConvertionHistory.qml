@@ -57,6 +57,7 @@ ListView {
                 Layout.rightMargin: Constants.margins
 
                 Label {
+                    Layout.alignment: Qt.AlignRight
                     text: convertionHistoryDelegate.currency_on_exchange_title
                     font.pointSize: Constants.mainFontPointSize
                 }
@@ -68,5 +69,12 @@ ListView {
                 }
             }
         }
+    }
+
+    ScrollBar.vertical: ScrollBar {
+        hoverEnabled: true
+        active: hovered || pressed
+        size: control.contentHeight > 0 ? control.height / control.contentHeight : 1
+        policy: ScrollBar.AsNeeded
     }
 }
