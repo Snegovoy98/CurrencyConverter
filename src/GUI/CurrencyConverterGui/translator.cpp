@@ -8,12 +8,6 @@ Translator::Translator(QQmlEngine *engine, QObject *parent)
     m_engine = engine;
     m_translator.reset(new QTranslator(this));
     m_db_worker = DBWorker::makeDB();
-    const QString languageCode = loadSavedLanguage();
-
-    if(languageCode != "")
-    {
-        setLanguage(languageCode);
-    }
 }
 
 void Translator::setLanguage(const QString &languageCode)

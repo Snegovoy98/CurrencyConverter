@@ -45,7 +45,8 @@ void DBWorker::saveSettings(const QString &settingName, const QVariant &settingV
     m_query->bindValue(":setting_value", settingValue);
 
     if(!m_query->exec())
-        emit errorHappened(m_query->lastError().text());
+        qWarning() << m_query->lastError().text();
+
     m_semaphore->release();
 }
 
@@ -56,7 +57,7 @@ const QVariant& DBWorker::getSettingBySettingName(const QString &settingName)
     m_query->bindValue(":setting_name", settingName);
 
     if(!m_query->exec())
-        emit errorHappened(m_query->lastError().text());
+        qWarning() << m_query->lastError().text();
 
     while (m_query->next())
     {
@@ -96,9 +97,8 @@ void DBWorker::loadCurrenciesToDB(const QJsonDocument &document)
             query.bindValue(":rate_cross",  rateCross);
 
             if(!query.exec())
-            {
-                emit errorHappened(query.lastError().text());
-            }
+                qWarning() << m_query->lastError().text();
+
         }
     }
     QSqlDatabase::removeDatabase(m_db_connection_name + number);
@@ -119,9 +119,7 @@ void DBWorker::clearCurrencies()
         query.prepare("DELETE FROM currencies");
 
         if(!query.exec())
-        {
-            emit errorHappened(query.lastError().text());
-        }
+            qWarning() << m_query->lastError().text();
     }
 
     m_semaphore->release();
@@ -143,13 +141,9 @@ void DBWorker::saveHistoryOfExchanges(const QString &currencyOnExchageTitle,
     m_query->bindValue(":exchange_date", exchangeDateTime);
 
     if(!m_query->exec())
-    {
-        emit errorHappened(m_query->lastError().text());
-    }
+        qWarning() << m_query->lastError().text();
     else
-    {
         emit historySaved();
-    }
 
     m_semaphore->release();
 }
@@ -193,9 +187,7 @@ const QSqlQuery *DBWorker::getCurrenciesToExchangeByOnExchangeCode(const int &on
     m_query->bindValue(":currency_on_exchange_code", onExchangeCode);
 
     if(!m_query->exec())
-    {
-        emit errorHappened(m_query->lastError().text());
-    }
+        qWarning() << m_query->lastError().text();
 
     return m_query.get();
     m_semaphore->release();
@@ -208,9 +200,7 @@ bool DBWorker::isSettingExists(const QString &settingName)
     m_query->bindValue(":setting_name", settingName);
 
     if(!m_query->exec())
-    {
-        emit errorHappened(m_query->lastError().text());
-    }
+        qWarning() << m_query->lastError().text();
 
     return m_query->first();
     m_semaphore->release();

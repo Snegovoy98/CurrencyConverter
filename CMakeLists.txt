@@ -11,7 +11,6 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 set(CurrencyConvertor_APP ON)
-set(CurrencyConvertor_Test OFF)
 
 if(IOS)
     option(BUILD_SHARED_LIBS "Build shared libs" OFF)
@@ -31,7 +30,6 @@ else()
     option(CurrencyConvertor_Test "This option enabled or disabled app test" ON)
 endif()
 
-add_subdirectory(src/Interfaces)
 add_subdirectory(src/Database)
 add_subdirectory(src/Core)
 
@@ -40,12 +38,6 @@ if(CurrencyConvertor_APP)
     add_subdirectory(src/App)
 else()
     message("The ${PROJECT_NAME} app is disabled")
-endif()
-
-if(CurrencyConvertor_Test)
-    add_subdirectory(tests)
-else()
-    message("The ${PROJECT_NAME} tests is disabled")
 endif()
 
 include(GNUInstallDirs)

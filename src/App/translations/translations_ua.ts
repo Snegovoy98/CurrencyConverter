@@ -58,19 +58,27 @@
 <context>
     <name>Main</name>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="18"/>
+        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="19"/>
         <source>Currency Converter</source>
         <translation>Конвертер валют</translation>
     </message>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="25"/>
+        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="26"/>
         <source>Currency Exchange</source>
         <translation>Обмін валюти</translation>
     </message>
     <message>
-        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="200"/>
+        <location filename="../../GUI/CurrencyConverterModules/Main.qml" line="201"/>
         <source>Save to history</source>
         <translation>Зберегти в історію</translation>
+    </message>
+</context>
+<context>
+    <name>MessageDialog</name>
+    <message>
+        <location filename="../../GUI/CurrencyConverterModules/Dialogs/MessageDialog.qml" line="16"/>
+        <source>Error</source>
+        <translation>Помилка</translation>
     </message>
 </context>
 </TS>

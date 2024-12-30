@@ -36,7 +36,7 @@ void SQLScriptExecutor::createTables()
 
             if(!query.exec(trimmedStatement))
             {
-                qDebug() << "Failed to execute statement:" << query.lastError().text();
+                qWarning() << "Failed to execute statement:" << query.lastError().text();
                 return;
             }
         }
@@ -48,7 +48,7 @@ void SQLScriptExecutor::readScript(const QString &filePath)
 {
     QFile file(filePath);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qDebug() << "Failed to open SQL script file: " << file.errorString();
+        qWarning() << "Failed to open SQL script file: " << file.errorString();
         return;
     }
 

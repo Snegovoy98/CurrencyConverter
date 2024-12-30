@@ -6,6 +6,7 @@ import com.preobrazhenskyi.Constants 1.0
 import com.preobrazhenskyi.Theme 1.0
 import "./Components"
 import "./Common"
+import "./Dialogs"
 import com.preobrazhenskyi.currency_on_exchange_model 1.0
 import com.preobrazhenskyi.currency_to_exchange_model 1.0
 import com.preobrazhenskyi.history_exchanges_model 1.0
@@ -215,6 +216,23 @@ ApplicationWindow {
                          currencyCard.currencyOnExchangeTextField.focus = true
                     }
                 }
+            }
+        }
+    }
+
+    MessageDialog {
+        id: messgaeDialog
+        width: 300
+        height: 300
+        visible:  checkMessageOnNull()
+        message: checkMessageOnNull() ?  messageShower.message : ""
+        anchors.centerIn: parent
+
+        function checkMessageOnNull() {
+            if(messageShower != null && messageShower.message != "") {
+                return true
+             } else {
+                return false
             }
         }
     }
