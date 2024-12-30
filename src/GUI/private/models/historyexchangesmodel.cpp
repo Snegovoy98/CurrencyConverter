@@ -69,7 +69,8 @@ void HistoryExchangesModel::fetchExchangesHistory()
         dataOfExchanges.m_value_per_unit                    = historyOfExchanges->value("value_per_unit").toDouble();
         dataOfExchanges.m_currency_to_exchange_title   = historyOfExchanges->value("currency_to_exchange_title").toString();
         dataOfExchanges.m_exchanged_sum                   = historyOfExchanges->value("exchanged_sum").toDouble();
-        dataOfExchanges.m_exchange_date                     =  historyOfExchanges->value("exchange_date").toDateTime();
+        dataOfExchanges.m_exchange_date                     = QDateTime::fromSecsSinceEpoch(historyOfExchanges->value("exchange_date").toInt()).toString("dd.MM.yyyy hh:mm:ss");
+
         beginResetModel();
         m_data_list.append(dataOfExchanges);
         endResetModel();

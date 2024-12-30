@@ -25,7 +25,7 @@ class HistoryExchangesModel : public QAbstractListModel
         double m_value_per_unit;
         QString m_currency_to_exchange_title;
         double m_exchanged_sum;
-        QDateTime m_exchange_date;
+        QString m_exchange_date;
     };
 
 public:

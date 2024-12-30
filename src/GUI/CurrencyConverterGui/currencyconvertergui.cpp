@@ -2,6 +2,7 @@
 #include <QGuiApplication>
 #include <QQuickStyle>
 #include <QQmlContext>
+#include <QObject>
 #include "../private/models/currencyonexchangemodel.h"
 #include "../private/models/currencytoexchangemodel.h"
 #include "../private/models/historyexchangesmodel.h"
@@ -10,8 +11,12 @@ CurrencyConverterGui::CurrencyConverterGui() {}
 
 bool CurrencyConverterGui::init(QQmlApplicationEngine *engine)
 {
+
     m_translator.reset(new Translator(engine));
     m_settings_worker.reset(new SettingsWorker());
+    m_message_shower.reset(new MessageShower());
+
+    QObject::connect(m_translator.get(), &Translator::errorChanged, m_message_shower.get(), &MessageShower::setMessage);
 
     #ifdef Q_OS_MACOS
         m_os_style = "macOS";
@@ -23,8 +28,14 @@ bool CurrencyConverterGui::init(QQmlApplicationEngine *engine)
 
     engine->addImportPath("qrc:/");
 
+    const QString languageCode = m_translator->loadSavedLanguage();
+
+    if(languageCode != "")
+        m_translator->setLanguage(languageCode);
+
     engine->rootContext()->setContextProperty("translator", m_translator.get());
     engine->rootContext()->setContextProperty("settingsWorker", m_settings_worker.get());
+    engine->rootContext()->setContextProperty("messageShower", m_message_shower.get());
 
     qmlRegisterType<CurrencyOnExchangeModel>("com.preobrazhenskyi.currency_on_exchange_model", 1, 0, "CurrencyOnExchangeModel");
     qmlRegisterType<CurrencyToExchangeModel>("com.preobrazhenskyi.currency_to_exchange_model", 1, 0, "CurrencyToExchangeModel");

@@ -12,5 +12,6 @@
         <file>private/countries_icons/es-language-icon.svg</file>
         <file>private/countries_icons/ru-language-icon.svg</file>
         <file>private/countries_icons/uk-language-icon.svg</file>
+        <file>private/alert_icon.svg</file>
     </qresource>
 </RCC>

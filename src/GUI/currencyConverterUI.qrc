@@ -7,5 +7,6 @@
         <file>CurrencyConverterModules/Common/Theme.qml</file>
         <file>CurrencyConverterModules/Common/Constants.qml</file>
         <file>CurrencyConverterModules/Common/LanguagesModel.qml</file>
+        <file>CurrencyConverterModules/Dialogs/MessageDialog.qml</file>
     </qresource>
 </RCC>

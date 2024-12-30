@@ -22,6 +22,7 @@ if(${QT_VERSION_MAJOR})
         "CurrencyConverterModules/*.qml"
         "CurrencyConverterModules/Common/*.qml"
         "CurrencyConverterModules/Components/*.qml"
+        "CurrencyConverterModules/Dialogs/*.qml"
     )
 endif()
 

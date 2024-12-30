@@ -77,4 +77,22 @@ ListView {
         size: control.contentHeight > 0 ? control.height / control.contentHeight : 1
         policy: ScrollBar.AsNeeded
     }
+
+    section.property: "exchange_date"
+    section.criteria: ViewSection.FullString
+    section.delegate: Rectangle {
+        width: ListView.view.width
+        height: 10
+        required property string section
+
+        Label {
+            text: parent.section
+            font {
+                italic: true
+                pixelSize: Constants.mainFontPointSize
+            }
+
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+    }
 }

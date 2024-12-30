@@ -5,6 +5,7 @@
 #include <QScopedPointer>
 #include "translator.h"
 #include "../../Core/public/CurrencyConverter/utility/settingsworker.h"
+#include "../../Core/public/CurrencyConverter/utility/messageshower.h"
 
 class CurrencyConverterGui
 {
@@ -17,6 +18,7 @@ private:
     QString m_os_style;
     QScopedPointer<Translator> m_translator;
     QScopedPointer<SettingsWorker> m_settings_worker;
+    QScopedPointer<MessageShower> m_message_shower;
 };
 
 #endif // CURRENCYCONVERTERGUI_H
