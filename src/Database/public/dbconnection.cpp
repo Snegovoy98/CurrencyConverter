@@ -24,7 +24,7 @@ void DBConnection::configureDatabase()
         }
     }
 
-    const QDir dbLocation = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    const QDir dbLocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
     if(!dbLocation.mkpath("."))
     {

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.31)
 
 set(CURRENT_PROJECT "${CMAKE_PROJECT_NAME}App")
 
