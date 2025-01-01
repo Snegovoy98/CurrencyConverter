@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>translations/translations_en.ts</file>
+        <file>translations/translations_fr.ts</file>
+        <file>translations/translations_it.ts</file>
+        <file>translations/translations_ru.ts</file>
+        <file>translations/translations_sp.ts</file>
+        <file>translations/translations_ua.ts</file>
+    </qresource>
+</RCC>

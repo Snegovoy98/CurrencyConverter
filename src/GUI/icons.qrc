@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>private/currency_delimiter.svg</file>
+        <file>private/minus_button.svg</file>
+        <file>private/plus_button.svg</file>
+        <file>private/refresh_button.svg</file>
+        <file>private/language_button.svg</file>
+        <file>private/countries_icons/de-language-icon.svg</file>
+        <file>private/countries_icons/en-language-icon.svg</file>
+        <file>private/countries_icons/fr-language-icon.svg</file>
+        <file>private/countries_icons/it-language-icon.svg</file>
+        <file>private/countries_icons/es-language-icon.svg</file>
+        <file>private/countries_icons/ru-language-icon.svg</file>
+        <file>private/countries_icons/uk-language-icon.svg</file>
+        <file>private/alert_icon.svg</file>
+    </qresource>
+</RCC>

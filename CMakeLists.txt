@@ -1,42 +1,48 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.31)
 
-project(CurrencyConverter VERSION 0.1 LANGUAGES CXX)
+project(CurrencyConverter VERSION 1.0.0 LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
-qt_standard_project_setup(REQUIRES 6.5)
+set(CurrencyConvertor_APP ON)
 
-qt_add_executable(appCurrencyConverter
-    main.cpp
-)
+if(IOS)
+    option(BUILD_SHARED_LIBS "Build shared libs" OFF)
+else()
+    option(BUILD_SHARED_LIBS "Build shared libs" ON)
+endif()
 
-qt_add_qml_module(appCurrencyConverter
-    URI CurrencyConverter
-    VERSION 1.0
-    QML_FILES
-        Main.qml
-)
+if(NOT DEFINED QT_VERSION_MAJOR)
+    find_package(QT NAMES Qt6 Qt5 COMPONENTS Core QUIET)
+endif()
 
-# Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
-# If you are developing for iOS or macOS you should consider setting an
-# explicit, fixed bundle identifier manually though.
-set_target_properties(appCurrencyConverter PROPERTIES
-#    MACOSX_BUNDLE_GUI_IDENTIFIER com.example.appCurrencyConverter
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
-)
+find_package(QT${QT_VERSION_MAJOR} COMPONENTS Core  QUIET)
 
-target_link_libraries(appCurrencyConverter
-    PRIVATE Qt6::Quick
-)
+add_subdirectory(src/Database)
+add_subdirectory(src/Core)
+
+if(CurrencyConvertor_APP)
+    add_subdirectory(src/GUI)
+    add_subdirectory(src/App)
+else()
+    message("The ${PROJECT_NAME} app is disabled")
+endif()
 
 include(GNUInstallDirs)
-install(TARGETS appCurrencyConverter
+install(TARGETS
+    "${PROJECT_NAME}"
+    "${PROJECT_NAME}Core"
+    "${PROJECT_NAME}Database"
+    "${PROJECT_NAME}Gui"
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+
