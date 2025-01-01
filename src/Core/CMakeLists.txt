@@ -13,15 +13,9 @@ file(GLOB SOURCE_APP
     "public/CurrencyConverter/utility/*.cpp"
 )
 
-if(${QT_VERSION_MAJOR})
-    file(GLOB SOURCE_QRC
-        "*.qrc"
-    )
-endif()
-
 set(PUBLIC_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/public")
 
-add_library(${CURRENT_PROJECT} ${SOURCE_APP} ${SOURCE_QRC})
+add_library(${CURRENT_PROJECT} ${SOURCE_APP})
 
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Sql Concurrent  Core REQUIRED)
 
