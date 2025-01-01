@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.31)
 
 add_definitions(-DCURRENCYCONVERTER_GUI_LIBRARY)
 set(CURRENT_PROJECT "${PROJECT_NAME}Gui")

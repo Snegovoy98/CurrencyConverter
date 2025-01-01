@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.31)
 
 project(CurrencyConverter VERSION 1.0.0 LANGUAGES CXX)
 
@@ -19,16 +19,10 @@ else()
 endif()
 
 if(NOT DEFINED QT_VERSION_MAJOR)
-    find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Test QUIET)
+    find_package(QT NAMES Qt6 Qt5 COMPONENTS Core QUIET)
 endif()
 
-find_package(QT${QT_VERSION_MAJOR} COMPONENTS Core Test QUIET)
-
-if(IOS)
-    option(CurrencyConvertor_Test "This option enabled or disabled app test" OFF)
-else()
-    option(CurrencyConvertor_Test "This option enabled or disabled app test" ON)
-endif()
+find_package(QT${QT_VERSION_MAJOR} COMPONENTS Core  QUIET)
 
 add_subdirectory(src/Database)
 add_subdirectory(src/Core)
@@ -50,3 +44,5 @@ install(TARGETS
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+
+
