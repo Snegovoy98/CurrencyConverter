@@ -8,11 +8,9 @@ set(CURRENT_PROJECT "${PROJECT_NAME}${CURRENT_PROJECT_DIR}")
 file(GLOB SOURCE_APP
     "public/*.h"
     "public/CurrencyConverter/utility/*.h"
-    "private/*.h"
 
     "public/*.cpp"
     "public/CurrencyConverter/utility/*.cpp"
-    "private/*.cpp"
 )
 
 if(${QT_VERSION_MAJOR})
@@ -22,7 +20,6 @@ if(${QT_VERSION_MAJOR})
 endif()
 
 set(PUBLIC_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/public")
-set(PRIVATE_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/private")
 
 add_library(${CURRENT_PROJECT} ${SOURCE_APP} ${SOURCE_QRC})
 
@@ -37,6 +34,5 @@ target_link_libraries(${CURRENT_PROJECT} PUBLIC
                              )
 
 target_include_directories(${CURRENT_PROJECT} PUBLIC ${PUBLIC_INCLUDE_DIR})
-target_include_directories(${CURRENT_PROJECT} PRIVATE ${PRIVATE_INCLUDE_DIR})
 
 
