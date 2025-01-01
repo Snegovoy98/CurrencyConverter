@@ -4,14 +4,11 @@ add_definitions(-DCURRENCYCONVERTER_GUI_LIBRARY)
 set(CURRENT_PROJECT "${PROJECT_NAME}Gui")
 
 file(GLOB SOURCE_APP
-    "*CurrencyConverterGui/*.cpp"
-    "private/platforms/*.cpp"
-    "private/models/*.cpp"
-
-    "*CurrencyConverterGui/*.h"
-    "private/*.h"
-    "private/platform/*.h"
+    "CurrencyConverterGui/*.h"
     "private/models/*.h"
+
+    "CurrencyConverterGui/*.cpp"
+    "private/models/*.cpp"
 )
 
 if(${QT_VERSION_MAJOR})
